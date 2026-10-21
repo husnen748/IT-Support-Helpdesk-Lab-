@@ -1,0 +1,133 @@
+Set Up Active Directory
+Step 1: Set a Static IP Address
+Before installing Active Directory, assign a static IP so the server's address does not change.
+
+Before picking an IP, check your current network range. Open Command Prompt and run:
+
+ipconfig
+If your current IP is something like 192.168.1.x, then 192.168.1.50 is fine. If it is 10.0.0.x, use something like 10.0.0.50 instead.
+
+Open Server Manager
+
+Click Local Server on the left
+
+Next to Ethernet, click the blue network link
+
+Right-click your network adapter (usually Ethernet0)
+
+Click Properties
+
+Select Internet Protocol Version 4 (TCP/IPv4)
+
+Click Properties
+
+Select Use the following IP address
+
+Enter your static IP settings — example: | Field | Example Value | |---|---| | IP Address | 192.168.1.50 | | Subnet Mask | 255.255.255.0 | | Default Gateway | 192.168.1.1 | | Preferred DNS | 192.168.1.50 | | Alternate DNS | 8.8.8.8 |
+
+Click OK to save
+
+Set the Preferred DNS to the server's own IP address. Domain Controllers run their own DNS service, so the server needs to point to itself.
+
+Screenshots
+
+Step 2: Add Roles and Features
+Open Server Manager
+Click Manage in the top-right corner
+Select Add Roles and Features
+Click Next on the Before You Begin page
+Select Role-based or feature-based installation > click Next
+Choose your local server (e.g., DC01) > click Next
+Screenshots
+
+Step 3: Enable Active Directory Domain Services
+On the server roles page, check Active Directory Domain Services
+When prompted, click Add Features
+Click Next through the Features page (leave defaults)
+Click Next through the AD DS info page
+Click Install on the confirmation page
+Wait for the installation to complete
+The server is not yet a Domain Controller — that happens in the next step.
+
+Screenshots
+
+Step 4: Promote to Domain Controller
+In Server Manager, click the notification flag in the top-right corner
+Select Promote this server to a domain controller
+On the deployment page, select Add a new forest
+Enter the root domain name: corp.local > click Next
+Screenshots
+
+Step 5: Configure Domain Controller Options
+Leave DNS server and Global Catalog (GC) checked
+Set a Directory Services Restore Mode (DSRM) password
+Save this password somewhere safe — it is used for recovery and is separate from the admin password
+Click Next
+Screenshots
+
+Step 6: Finish Configuration
+DNS Options — you may see a delegation warning, this is normal in a lab > click Next
+NetBIOS name — confirm it shows CORP > click Next
+Paths — leave the default database, log, and SYSVOL paths > click Next
+Review — confirm your settings > click Next
+Wait for prerequisite checks to pass > click Install The server will now configure Active Directory, install DNS, create the forest, and promote itself to a Domain Controller.
+Screenshots
+
+Step 7: Restart and Log In
+The server will restart automatically after installation
+At the login screen, log in as the Domain Administrator:
+CORP\Administrator
+or
+
+Administrator@corp.local
+
+Domain Join Experience
+Simulate joining a Windows client machine to your domain.
+
+Steps:
+
+Set up a second VM running Windows 10 or 11
+Set its DNS server to the IP address of your Domain Controller
+Go to Settings > System > About > Domain or workgroup
+Click Change and enter your domain name (e.g., corp.local)
+Enter Domain Administrator credentials when prompted
+Restart the VM
+Log in using a domain user account (e.g., corp\jsmith)
+
+Group Policy Management
+Group Policies let you enforce settings and rules across users and computers in the domain.
+
+Steps:
+
+Open Group Policy Management from Server Manager > Tools
+Expand your domain > right-click Group Policy Objects > New
+Name the policy (e.g., Password Policy, Desktop Lockdown)
+Right-click the policy > Edit to open the Group Policy Editor
+Navigate to the setting you want to configure (e.g., Computer Configuration > Policies > Windows Settings > Security Settings)
+Link the policy to an OU by dragging it or right-clicking the OU > Link an Existing GPO
+Run gpupdate /force on a client machine to apply changes immediately
+
+Organizational Units (OUs)
+OUs let you organize users, computers, and groups into logical containers — similar to folders.
+
+Steps:
+
+In ADUC, right-click your domain > New > Organizational Unit
+Name the OU (e.g., IT Department, HR, Finance)
+Drag and drop users or computers into the appropriate OU
+OUs can have Group Policies applied to them individually
+
+User & Group Management
+Create and manage user accounts and groups inside Active Directory Users and Computers (ADUC).
+
+Steps:
+
+Open Active Directory Users and Computers from Server Manager > Tools
+Expand your domain (e.g., corp.local)
+Right-click Users > New > User
+Fill in the first name, last name, and username (e.g., jsmith)
+Set a password and configure password settings
+Click Finish to create the user
+To create a group, right-click Users > New > Group
+Name the group (e.g., IT Support), set scope to Global and type to Security
+Open the group > Members tab > Add to assign users
