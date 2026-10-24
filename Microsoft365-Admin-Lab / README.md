@@ -3,13 +3,13 @@
 
 ## Overview
 
-This project documents my practical experience using the Microsoft 365 Admin Centre to carry out common IT support and user administration tasks.
+This project documents my practical experience using the Microsoft 365 Admin Centre to perform common IT support administration tasks.
 
-The lab focuses on creating Microsoft 365 groups, managing group membership, creating user accounts, assigning licences, blocking user sign-in and deleting user accounts.
+The lab covers Microsoft 365 group management, user account creation, licence configuration, blocking user sign-in and deleting user accounts.
 
-These tasks reflect common responsibilities of a 1st Line IT Support Technician, Service Desk Analyst or IT Administrator.
+I completed three administration exercises and documented them using 10 screenshots.
 
-I have documented three tasks with 10 screenshots showing the administrative actions and their results.
+These tasks are relevant to 1st Line IT Support, Service Desk Analyst and IT Administrator roles.
 
 ---
 
@@ -25,17 +25,10 @@ I have documented three tasks with 10 screenshots showing the administrative act
 
 ## Lab Environment
 
-**Platform:** Microsoft 365 Admin Centre
-
-**Areas covered:**
-- Microsoft 365 group management
-- User account provisioning
-- Microsoft 365 licence assignment
-- Group membership management
-- User access management
-- User offboarding and account deletion
-
-**Evidence:** 10 screenshots across three tasks.
+- **Platform:** Microsoft 365 Admin Centre
+- **Focus:** User and group administration
+- **Tasks Completed:** 3
+- **Screenshots:** 10
 
 ---
 
@@ -43,48 +36,47 @@ I have documented three tasks with 10 screenshots showing the administrative act
 
 ### Objective
 
-Create a Microsoft 365 group called **IT Support Team**, review its configuration and verify that **Peter Long** is a member.
+Create a Microsoft 365 group called **IT Support Team**, review its settings and add **Peter Long** as a member.
 
-### Actions Performed
+### Steps Completed
 
 1. Opened the Microsoft 365 Admin Centre.
 2. Navigated to the group management section.
-3. Started the process of creating a new Microsoft 365 group.
-4. Entered the group name **IT Support Team**.
-5. Reviewed the group owner, membership and settings.
-6. Completed the group creation process.
-7. Added **Peter Long** as a group member.
-8. Verified that Peter Long appeared in the group's membership list.
+3. Created a Microsoft 365 group called IT Support Team.
+4. Reviewed the group owner, members and configuration.
+5. Confirmed the group was successfully created.
+6. Added Peter Long to the group.
+7. Verified that Peter Long appeared in the membership list.
 
 ### Screenshot 01 - Create Microsoft 365 Group
 
 Entered the details required to create the IT Support Team group.
 
-![Create Microsoft 365 Group](screenshots/01-create-microsoft365-group.png)
+![Create Microsoft 365 Group](screenshots/01-create-microsoft365-group.png.png)
 
 ### Screenshot 02 - Group Configuration
 
 Reviewed the group owner, members and configuration settings.
 
-![Group Configuration](screenshots/02-group-configuration.png)
+![Group Configuration](screenshots/02-group-configuration.png.png)
 
 ### Screenshot 03 - Group Created
 
 Confirmed that the IT Support Team group was successfully created.
 
-![Group Created](screenshots/03-group-created.png)
+![Group Created](screenshots/03-group-created.png.png)
 
 ### Screenshot 04 - Group Membership
 
-Verified that Peter Long had been added as a member of the IT Support Team group.
+Verified that Peter Long was added as a member of the IT Support Team group.
 
-![Group Membership](screenshots/04-group-membership.png)
+![Group Membership](screenshots/04-group-membership.png.png)
 
 ### Result
 
-Successfully created a Microsoft 365 group, reviewed its configuration and verified the required group membership.
+Successfully created the IT Support Team group, reviewed its configuration and verified the required group membership.
 
-**Skills demonstrated:** Microsoft 365 group management, membership administration and configuration verification.
+**Skills demonstrated:** Microsoft 365 group management, group configuration and membership administration.
 
 ---
 
@@ -92,43 +84,43 @@ Successfully created a Microsoft 365 group, reviewed its configuration and verif
 
 ### Objective
 
-Create a new Microsoft 365 user account for **Peter Long**, configure the account settings and review the Microsoft 365 Business Standard licence.
+Create a new Microsoft 365 user account for **Peter Long** and review the account settings and Microsoft 365 Business Standard licence.
 
-### Actions Performed
+### Steps Completed
 
 1. Opened the Microsoft 365 Admin Centre.
 2. Navigated to the user management section.
-3. Started the process of creating a new user.
+3. Selected the option to create a new user.
 4. Entered Peter Long's account information.
-5. Reviewed the password configuration options.
+5. Configured the password options.
 6. Reviewed the account permissions.
 7. Reviewed the Microsoft 365 Business Standard licence.
-8. Completed the user creation process.
-9. Verified that the user account was successfully created.
+8. Completed the account creation process.
+9. Verified that the new user account was created successfully.
 
 ### Screenshot 05 - Create User
 
-Entered Peter Long's user account details and password options.
+Entered Peter Long's account details and password options.
 
-![Create Microsoft 365 User](screenshots/05-create-user.png)
+![Create Microsoft 365 User](screenshots/05-create-user.png.png)
 
 ### Screenshot 06 - Review User
 
 Reviewed the account details, permissions and Microsoft 365 Business Standard licence.
 
-![Review User Account](screenshots/06-review-user.png)
+![Review User](screenshots/06-review-user.png.png)
 
 ### Screenshot 07 - User Created
 
 Confirmed that Peter Long's Microsoft 365 user account was successfully created.
 
-![User Created](screenshots/07-user-created.png)
+![User Created](screenshots/07-user-created.png.png)
 
 ### Result
 
-Successfully created a Microsoft 365 user account and reviewed its configuration and licence information.
+Successfully created a Microsoft 365 user account and reviewed its settings and licence configuration.
 
-**Skills demonstrated:** User provisioning, account configuration, password settings and Microsoft 365 licence administration.
+**Skills demonstrated:** User provisioning, account management, password configuration and Microsoft 365 licensing.
 
 ---
 
@@ -136,42 +128,42 @@ Successfully created a Microsoft 365 user account and reviewed its configuration
 
 ### Objective
 
-Carry out a user offboarding exercise by blocking **Carl Handen** from signing in, deleting the user account and verifying its deletion.
+Complete a user offboarding exercise by blocking **Carl Handen** from signing in, deleting the account and verifying its deletion.
 
-### Actions Performed
+### Steps Completed
 
 1. Opened the Microsoft 365 Admin Centre.
 2. Located Carl Handen's user account.
-3. Opened the user account settings.
+3. Opened the account settings.
 4. Blocked the user from signing in.
-5. Confirmed that sign-in access was blocked.
+5. Confirmed that sign-in was blocked.
 6. Deleted the user account.
-7. Navigated to the Deleted Users section.
+7. Opened the Deleted Users section.
 8. Verified that Carl Handen's account appeared in the deleted users list.
 
 ### Screenshot 08 - User Sign-in Blocked
 
 Blocked Carl Handen from signing in to Microsoft 365.
 
-![User Sign-in Blocked](screenshots/08-user-signin-blocked.png)
+![User Sign-in Blocked](screenshots/08-user-signin-blocked.png.png)
 
 ### Screenshot 09 - User Deleted
 
-Completed the account deletion process for Carl Handen.
+Completed the deletion of Carl Handen's account.
 
-![User Deleted](screenshots/09-user-deleted.png)
+![User Deleted](screenshots/09-user-deleted.png.png)
 
 ### Screenshot 10 - Deleted User Verified
 
-Verified that Carl Handen's account appeared in the Deleted Users section.
+Confirmed that Carl Handen's account appeared in the Deleted Users section.
 
-![Deleted User Verified](screenshots/10-deleted-user-verified.png)
+![Deleted User Verified](screenshots/10-deleted-user-verified.png.png)
 
 ### Result
 
-Successfully blocked user sign-in, deleted the user account and verified the account deletion.
+Successfully blocked user sign-in, deleted the account and verified its deletion.
 
-**Skills demonstrated:** User offboarding, account security, access management and account deletion.
+**Skills demonstrated:** User offboarding, account security, access management and user deletion.
 
 ---
 
@@ -180,48 +172,49 @@ Successfully blocked user sign-in, deleted the user account and verified the acc
 | Task | Screenshots | Description |
 |---|---|---|
 | Task 1 | 01-04 | Group creation and membership management |
-| Task 2 | 05-07 | User creation and licence configuration |
-| Task 3 | 08-10 | Blocking sign-in and user deletion |
-| **Total** | **10** | **Three Microsoft 365 administration tasks** |
+| Task 2 | 05-07 | User provisioning and licence configuration |
+| Task 3 | 08-10 | Blocking sign-in and account deletion |
+| **Total** | **10** | **Three administration exercises** |
 
 ---
 
 ## Skills Demonstrated
 
-Through these Microsoft 365 administration exercises, I have practised:
+Through this lab, I have practised:
 
-- Navigating the Microsoft 365 Admin Centre
-- Creating and configuring Microsoft 365 groups
-- Managing group membership
-- Creating Microsoft 365 user accounts
-- Configuring user password options
-- Reviewing Microsoft 365 Business Standard licensing
-- Managing user permissions and access
-- Blocking Microsoft 365 user sign-in
-- Deleting user accounts
-- Verifying completed administrative actions
-- Documenting IT support tasks using screenshots
+- Microsoft 365 Admin Centre navigation
+- Microsoft 365 group creation
+- Group membership management
+- User account creation and provisioning
+- Password configuration
+- Microsoft 365 licence administration
+- User permissions and access control
+- Blocking user sign-in
+- User account deletion
+- User offboarding
+- Verifying administrative actions
+- Documenting completed tasks with screenshots
 
 ---
 
 ## Relevance to IT Support
 
-These exercises relate directly to common service desk responsibilities.
+These exercises reflect common tasks carried out by IT Support Technicians and Service Desk Analysts.
 
-**New employee onboarding:** Creating accounts, reviewing licences and adding users to the required groups.
+**Employee onboarding:** Creating new user accounts, configuring access and managing group membership.
 
-**User access management:** Managing group membership and reviewing account permissions.
+**Account administration:** Reviewing user details, permissions and Microsoft 365 licences.
 
-**Employee offboarding:** Blocking sign-in, removing accounts and verifying administrative changes.
+**Employee offboarding:** Blocking access, deleting accounts and confirming that changes have been applied.
 
-**Technical documentation:** Recording the steps taken and providing evidence of completed tasks.
+**Technical documentation:** Recording administration tasks and providing screenshots as evidence.
 
 ---
 
 ## Conclusion
 
-This Microsoft 365 Admin Lab demonstrates my practical learning in user account management, Microsoft 365 group administration and user offboarding.
+This Microsoft 365 Admin Lab demonstrates my practical learning in Microsoft 365 user management, group administration and user offboarding.
 
-By completing these exercises, I have developed my understanding of the Microsoft 365 Admin Centre and the administrative tasks commonly performed in a 1st Line IT Support or Service Desk role.
+Completing these exercises has helped me develop the skills needed for entry-level IT Support and Service Desk roles.
 
-The 10 screenshots provide supporting evidence of the three lab exercises and their results.
+The 10 screenshots document the administration tasks and provide supporting evidence of the work completed.
