@@ -1,500 +1,227 @@
-# Microsoft 365 Administration Lab
 
-## Project Overview
+# Microsoft 365 Admin Lab
 
-This project documents common Microsoft 365 administrative tasks performed by Level 1 IT Support Technicians and Service Desk Analysts.
+## Overview
 
-The aim is to develop practical experience managing Microsoft 365 users, licences, security groups, passwords, OneDrive sharing permissions and administrative settings.
+This project documents my practical experience using the Microsoft 365 Admin Centre to carry out common IT support and user administration tasks.
 
-Each lab includes a scenario, objective, step-by-step instructions and space for screenshots and verification results.
+The lab focuses on creating Microsoft 365 groups, managing group membership, creating user accounts, assigning licences, blocking user sign-in and deleting user accounts.
 
-## Technologies and Tools
+These tasks reflect common responsibilities of a 1st Line IT Support Technician, Service Desk Analyst or IT Administrator.
 
-- Microsoft 365 Admin Centre
-- Microsoft Entra ID
-- Microsoft Exchange Online
-- Microsoft Teams Admin Centre
-- Microsoft SharePoint Admin Centre
-- Microsoft OneDrive
-- Microsoft 365 Groups
+I have documented three tasks with 10 screenshots showing the administrative actions and their results.
+
+---
+
+## Table of Contents
+
+1. [Task 1 - Create a Microsoft 365 Group and Add a Member](#task-1---create-a-microsoft-365-group-and-add-a-member)
+2. [Task 2 - Create a Microsoft 365 User](#task-2---create-a-microsoft-365-user)
+3. [Task 3 - Block Sign-in and Delete a User](#task-3---block-sign-in-and-delete-a-user)
+4. [Skills Demonstrated](#skills-demonstrated)
+5. [Conclusion](#conclusion)
+
+---
 
 ## Lab Environment
 
-| Component | Description |
-|---|---|
-| Administration portal | https://admin.microsoft.com |
-| Identity management | Microsoft Entra ID |
-| User management | Microsoft 365 Admin Centre |
-| Licence management | Microsoft 365 Admin Centre |
-| Email administration | Exchange Admin Centre |
-| Collaboration | Microsoft Teams |
-| File storage | OneDrive and SharePoint |
-| Environment | Microsoft 365 test tenant |
+**Platform:** Microsoft 365 Admin Centre
 
-**Note:** The exercises require a Microsoft 365 tenant with suitable administrator permissions. Some features require specific subscriptions or licences.
+**Areas covered:**
+- Microsoft 365 group management
+- User account provisioning
+- Microsoft 365 licence assignment
+- Group membership management
+- User access management
+- User offboarding and account deletion
 
----
-
-# Part 1: Create a User and Assign a Microsoft 365 Licence
-
-## Scenario
-
-A new employee joins the organisation and requires a Microsoft 365 account to access company email, Teams, OneDrive and other business applications.
-
-## Objective
-
-Create a new user account in Microsoft 365 and assign an appropriate licence.
-
-## Step 1: Open the Microsoft 365 Admin Centre
-
-1. Open a web browser.
-2. Navigate to https://admin.microsoft.com.
-3. Sign in using an authorised administrator account.
-4. From the navigation menu, select **Users**.
-5. Click **Active users**.
-6. Select **Add a user**.
-
-## Step 2: Enter User Information
-
-1. Enter the employee's first name.
-2. Enter their last name.
-3. Create a username.
-4. Select the appropriate domain.
-5. Configure the initial password settings.
-6. Require the user to change the temporary password at first sign-in, where available and appropriate.
-7. Click **Next**.
-
-### Example User Details
-
-| Field | Example |
-|---|---|
-| First Name | James |
-| Last Name | Smith |
-| Display Name | James Smith |
-| Username | james.smith |
-| Department | IT |
-| Account Type | Standard User |
-
-## Step 3: Assign a Microsoft 365 Licence
-
-1. Open the **Product licences** section.
-2. Select the appropriate usage location.
-3. Review the available licences.
-4. Select a licence appropriate for the user's role.
-
-Example:
-
-**Microsoft 365 E5**, if available in the lab tenant.
-
-5. Review the included services.
-6. Click **Next**.
-
-**Note:** A licence must be available in the tenant before it can be assigned. Different Microsoft 365 subscriptions include different features.
-
-## Step 4: Complete Account Creation
-
-1. Review the user information.
-2. Confirm the selected licence.
-3. Click **Finish adding**.
-4. Return to **Users > Active users**.
-5. Search for the newly created user.
-6. Open their profile to verify the account information and assigned licence.
-
-## Verification
-
-- Confirm the user appears in Active users.
-- Confirm the correct licence is assigned.
-- Verify that the account is enabled for sign-in.
-- Test access to an appropriately licensed service when possible.
-
-### Screenshots
-
-*Add screenshots showing the user creation wizard, licence selection, confirmation page and completed user profile.*
+**Evidence:** 10 screenshots across three tasks.
 
 ---
 
-# Part 2: Create a Microsoft 365 Group and Add a User
+## Task 1 - Create a Microsoft 365 Group and Add a Member
 
-## Scenario
+### Objective
 
-A new department requires a Microsoft 365 group so employees can collaborate and access shared resources.
+Create a Microsoft 365 group called **IT Support Team**, review its configuration and verify that **Peter Long** is a member.
 
-## Objective
+### Actions Performed
 
-Create a Microsoft 365 group, configure its settings and add an existing user as a member.
+1. Opened the Microsoft 365 Admin Centre.
+2. Navigated to the group management section.
+3. Started the process of creating a new Microsoft 365 group.
+4. Entered the group name **IT Support Team**.
+5. Reviewed the group owner, membership and settings.
+6. Completed the group creation process.
+7. Added **Peter Long** as a group member.
+8. Verified that Peter Long appeared in the group's membership list.
 
-## Step 1: Open Group Management
+### Screenshot 01 - Create Microsoft 365 Group
 
-1. Sign in to https://admin.microsoft.com.
-2. Expand **Teams & groups**.
-3. Select **Active teams & groups**.
-4. Click **Add a group**.
-5. Select **Microsoft 365** as the group type.
-6. Click **Next**.
+Entered the details required to create the IT Support Team group.
 
-## Step 2: Configure the Group
+![Create Microsoft 365 Group](screenshots/01-create-microsoft365-group.png)
 
-1. Enter a group name.
-2. Add a description explaining its purpose.
-3. Configure the group email address, where prompted.
-4. Select suitable privacy settings.
-5. Continue through the setup wizard.
+### Screenshot 02 - Group Configuration
 
-### Example Group
+Reviewed the group owner, members and configuration settings.
 
-| Field | Example |
-|---|---|
-| Group Name | IT Support Team |
-| Description | Collaboration group for IT Support staff |
-| Group Type | Microsoft 365 |
-| Privacy | Private |
-| Department | IT |
+![Group Configuration](screenshots/02-group-configuration.png)
 
-## Step 3: Add Members
+### Screenshot 03 - Group Created
 
-1. Select the option to assign owners and members.
-2. Choose an appropriate group owner.
-3. Search for the user account.
-4. Select the user.
-5. Add the user as a member.
-6. Review the configuration.
-7. Complete group creation.
+Confirmed that the IT Support Team group was successfully created.
 
-## Step 4: Verify Group Membership
+![Group Created](screenshots/03-group-created.png)
 
-1. Return to **Active teams & groups**.
-2. Locate the new group.
-3. Open its details.
-4. Navigate to **Members**.
-5. Verify that the correct user appears in the membership list.
+### Screenshot 04 - Group Membership
 
-## Verification
+Verified that Peter Long had been added as a member of the IT Support Team group.
 
-- Confirm the Microsoft 365 group exists.
-- Confirm the correct user has been added.
-- Check group ownership and privacy settings.
-- Verify access to the group's available resources.
+![Group Membership](screenshots/04-group-membership.png)
 
-**Note:** Microsoft 365 groups can support shared resources such as group mailboxes, calendars and SharePoint sites. A Microsoft Teams team is not automatically created for every Microsoft 365 group, and shared mailboxes can also be managed separately in Exchange Online.
+### Result
 
-### Screenshots
+Successfully created a Microsoft 365 group, reviewed its configuration and verified the required group membership.
 
-*Add screenshots showing group creation, settings, member selection and confirmed membership.*
+**Skills demonstrated:** Microsoft 365 group management, membership administration and configuration verification.
 
 ---
 
-# Part 3: Reset a User's Microsoft 365 Password
+## Task 2 - Create a Microsoft 365 User
 
-## Scenario
+### Objective
 
-An employee contacts the IT Service Desk because they have forgotten their Microsoft 365 password and cannot access their account.
+Create a new Microsoft 365 user account for **Peter Long**, configure the account settings and review the Microsoft 365 Business Standard licence.
 
-## Objective
+### Actions Performed
 
-Reset the user's password securely and restore account access.
+1. Opened the Microsoft 365 Admin Centre.
+2. Navigated to the user management section.
+3. Started the process of creating a new user.
+4. Entered Peter Long's account information.
+5. Reviewed the password configuration options.
+6. Reviewed the account permissions.
+7. Reviewed the Microsoft 365 Business Standard licence.
+8. Completed the user creation process.
+9. Verified that the user account was successfully created.
 
-## Step 1: Verify the User
+### Screenshot 05 - Create User
 
-1. Confirm the employee's identity using an approved verification procedure.
-2. Confirm that a password reset is required.
-3. Record the support request in the ticketing system, if available.
+Entered Peter Long's user account details and password options.
 
-## Step 2: Open the User Account
+![Create Microsoft 365 User](screenshots/05-create-user.png)
 
-1. Sign in to https://admin.microsoft.com.
-2. Select **Users > Active users**.
-3. Search for the affected employee.
-4. Select the user's account.
-5. Click **Reset password**.
+### Screenshot 06 - Review User
 
-## Step 3: Reset the Password
+Reviewed the account details, permissions and Microsoft 365 Business Standard licence.
 
-1. Choose the option to generate a temporary password, if available.
-2. Require the user to change the password at the next sign-in, where supported.
-3. Confirm the reset.
-4. Provide the temporary password through an approved secure communication channel.
+![Review User Account](screenshots/06-review-user.png)
 
-**Important:** Never include an actual password in screenshots, public GitHub repositories or support ticket notes.
+### Screenshot 07 - User Created
 
-## Step 4: Verify Account Access
+Confirmed that Peter Long's Microsoft 365 user account was successfully created.
 
-1. Ask the user to attempt signing in.
-2. Confirm that the user can set a new password.
-3. Verify access to Microsoft 365 services.
-4. Update the support ticket with the outcome.
+![User Created](screenshots/07-user-created.png)
 
-**Note:** For organisations using synchronised or federated identities, password reset procedures may depend on the identity configuration and password writeback capabilities.
+### Result
 
-### Screenshots
+Successfully created a Microsoft 365 user account and reviewed its configuration and licence information.
 
-*Add screenshots showing the password reset option and confirmation page, with any sensitive information hidden.*
+**Skills demonstrated:** User provisioning, account configuration, password settings and Microsoft 365 licence administration.
 
 ---
 
-# Part 4: Disable and Delete a User Account – Offboarding
+## Task 3 - Block Sign-in and Delete a User
 
-## Scenario
+### Objective
 
-An employee leaves the organisation and their Microsoft 365 account must be secured and removed according to the company's offboarding procedure.
+Carry out a user offboarding exercise by blocking **Carl Handen** from signing in, deleting the user account and verifying its deletion.
 
-## Objective
+### Actions Performed
 
-Block the user's access, review their resources and safely remove the account when authorised.
+1. Opened the Microsoft 365 Admin Centre.
+2. Located Carl Handen's user account.
+3. Opened the user account settings.
+4. Blocked the user from signing in.
+5. Confirmed that sign-in access was blocked.
+6. Deleted the user account.
+7. Navigated to the Deleted Users section.
+8. Verified that Carl Handen's account appeared in the deleted users list.
 
-## Step 1: Locate the User
+### Screenshot 08 - User Sign-in Blocked
 
-1. Sign in to https://admin.microsoft.com.
-2. Navigate to **Users > Active users**.
-3. Search for the employee.
-4. Open their user profile.
+Blocked Carl Handen from signing in to Microsoft 365.
 
-## Step 2: Block Sign-In
+![User Sign-in Blocked](screenshots/08-user-signin-blocked.png)
 
-1. Select **Block sign-in**.
-2. Change the sign-in status to blocked.
-3. Save the changes.
-4. Confirm the account shows the updated status.
+### Screenshot 09 - User Deleted
 
-Blocking sign-in helps prevent further authentication using the account. Existing sessions may remain active temporarily, so administrators should revoke active sessions where required.
+Completed the account deletion process for Carl Handen.
 
-## Step 3: Review User Resources
+![User Deleted](screenshots/09-user-deleted.png)
 
-Before deleting the account:
+### Screenshot 10 - Deleted User Verified
 
-1. Review the user's assigned licences.
-2. Identify their mailbox and OneDrive data.
-3. Check any required mailbox delegation or data retention.
-4. Review Microsoft 365 group memberships.
-5. Arrange transfer of business data to authorised employees.
-6. Confirm that the offboarding process has been approved.
+Verified that Carl Handen's account appeared in the Deleted Users section.
 
-## Step 4: Delete the User
+![Deleted User Verified](screenshots/10-deleted-user-verified.png)
 
-1. Navigate to **Users > Active users**.
-2. Select the affected account.
-3. Click **Delete user**.
-4. Review the deletion information.
-5. Confirm deletion only when authorised.
+### Result
 
-## Step 5: Review Deleted Users
+Successfully blocked user sign-in, deleted the user account and verified the account deletion.
 
-1. Navigate to **Users > Deleted users**.
-2. Locate the deleted account.
-3. Confirm that the account appears in the deleted users list.
-
-Deleted Microsoft Entra ID user objects are generally recoverable for 30 days, subject to relevant conditions. Mailbox and OneDrive retention behaviours can differ.
-
-**Important:** Permanent deletion should only be performed when explicitly authorised and after checking applicable retention and data recovery requirements. Do not permanently delete accounts merely to complete an offboarding exercise.
-
-## Verification
-
-- Confirm sign-in has been blocked.
-- Confirm the account has been deleted if that was the approved action.
-- Review relevant access and resource assignments.
-- Record the completed offboarding actions.
-
-### Screenshots
-
-*Add screenshots showing sign-in blocking, the deletion process and the deleted users list.*
+**Skills demonstrated:** User offboarding, account security, access management and account deletion.
 
 ---
 
-# Part 5: Manage OneDrive Sharing Permissions
+## Screenshot Summary
 
-## Scenario
-
-A department requests a change to OneDrive folder permissions to ensure only authorised employees can access shared files.
-
-## Objective
-
-Review organisation-level sharing settings and manage access to a specific OneDrive folder.
-
-## Step 1: Open the SharePoint Admin Centre
-
-1. Sign in to https://admin.microsoft.com.
-2. Select **Show all**, if necessary.
-3. Open **Admin centres**.
-4. Select **SharePoint**.
-5. Navigate to **Policies > Sharing**.
-
-## Step 2: Review Organisation-Wide Sharing
-
-1. Review the current SharePoint sharing settings.
-2. Review the OneDrive external sharing settings.
-3. Identify the level of external sharing currently permitted.
-4. Check whether the configured settings meet the organisation's security requirements.
-
-Examples of sharing levels include:
-
-- Anyone
-- New and existing guests
-- Existing guests
-- Only people in your organisation
-
-For an internal-only lab, select **Only people in your organisation** if the exercise requires preventing external sharing.
-
-**Important:** Organisation-wide sharing changes may affect many users. Only make these changes in your own test tenant or with appropriate authorisation.
-
-## Step 3: Open a User's OneDrive
-
-1. Open **Microsoft 365 Admin Centre**.
-2. Navigate to **Users > Active users**.
-3. Select the appropriate user.
-4. Open the user's **OneDrive** settings, if available.
-5. Use the available authorised access method to open their OneDrive.
-
-## Step 4: Modify Folder Permissions
-
-1. Locate the required folder.
-2. Select the folder.
-3. Open **Manage access**.
-4. Review existing users and sharing links.
-5. Remove access for users who no longer require it.
-6. Configure an appropriate permission level for authorised users.
-
-Examples:
-
-- **Can view** – Users can view the files.
-- **Can edit** – Users can modify the files.
-
-7. Save the changes.
-
-## Step 5: Verify the Permissions
-
-1. Reopen **Manage access**.
-2. Confirm that only the intended users or groups have access.
-3. Review whether any existing sharing links remain.
-4. Test the permitted access level using an appropriate test account.
-
-### Screenshots
-
-*Add screenshots showing SharePoint sharing policies, OneDrive folder permissions and updated access settings.*
+| Task | Screenshots | Description |
+|---|---|---|
+| Task 1 | 01-04 | Group creation and membership management |
+| Task 2 | 05-07 | User creation and licence configuration |
+| Task 3 | 08-10 | Blocking sign-in and user deletion |
+| **Total** | **10** | **Three Microsoft 365 administration tasks** |
 
 ---
 
-# Part 6: Explore Outlook, Teams and OneDrive Administration
+## Skills Demonstrated
 
-## Scenario
+Through these Microsoft 365 administration exercises, I have practised:
 
-An IT Support Technician needs to understand where Microsoft 365 collaboration and email services are managed.
-
-## Objective
-
-Explore the administrative settings available for Exchange Online, Microsoft Teams and OneDrive.
-
-## Step 1: Review Microsoft 365 Organisation Settings
-
-1. Sign in to https://admin.microsoft.com.
-2. Navigate to **Settings > Org settings**.
-3. Review the available organisational settings.
-4. Identify settings that apply across the tenant.
-5. Record the settings relevant to IT support.
-
-## Step 2: Explore Exchange Online Administration
-
-1. Open the **Exchange Admin Centre**.
-2. Navigate to the recipients section.
-3. Review user mailboxes.
-4. Explore shared mailbox settings.
-5. Review available mailbox delegation options.
-6. Identify common mailbox administration tasks.
-
-### Examples
-
-- Reviewing mailbox properties
-- Managing shared mailboxes
-- Assigning mailbox permissions
-- Checking mailbox storage
-- Investigating basic mail-flow issues
-
-## Step 3: Explore Microsoft Teams Administration
-
-1. Open the **Teams Admin Centre**.
-2. Review available user management settings.
-3. Explore Teams policies.
-4. Review guest access settings.
-5. Review external access settings.
-6. Identify settings that administrators can manage for users and the organisation.
-
-**Note:** Guest access and external access are separate Teams capabilities and may be controlled through different administrative settings.
-
-## Step 4: Explore OneDrive Administration
-
-1. Open the **SharePoint Admin Centre**.
-2. Review **OneDrive** settings.
-3. Explore storage management.
-4. Review sharing permissions.
-5. Review synchronisation settings and available policies.
-6. Identify settings relevant to user support.
-
-## Step 5: Record Findings
-
-Document which admin centre is responsible for each service.
-
-| Service | Administration Tool |
-|---|---|
-| User accounts | Microsoft 365 Admin Centre / Entra Admin Centre |
-| User licences | Microsoft 365 Admin Centre |
-| Outlook mailboxes | Exchange Admin Centre |
-| Microsoft Teams | Teams Admin Centre |
-| OneDrive | SharePoint Admin Centre |
-| Identity and security groups | Entra Admin Centre |
-
-### Screenshots
-
-*Add screenshots showing the Exchange, Teams and SharePoint administrative interfaces and the settings reviewed.*
-
----
-
-# General Microsoft 365 Administration Process
-
-When responding to Microsoft 365 support requests, follow a consistent support procedure.
-
-1. **Identify the request:** Determine what the employee needs.
-2. **Verify authorisation:** Confirm their identity and that the requested change is permitted.
-3. **Investigate:** Review the relevant Microsoft 365 settings.
-4. **Perform the task:** Make the approved administrative change.
-5. **Verify:** Confirm the expected result.
-6. **Document:** Record the actions taken and outcome.
-7. **Close or escalate:** Resolve the request or refer it to the appropriate administrator.
-
----
-
-# Project Summary
-
-This Microsoft 365 Administration Lab provides a foundation for understanding and practising common cloud administration tasks performed by IT Support Technicians and Service Desk Analysts.
-
-## Skills Covered
-
-- Microsoft 365 Admin Centre navigation
-- Creating and managing user accounts
-- Assigning and reviewing licences
-- Creating Microsoft 365 groups
+- Navigating the Microsoft 365 Admin Centre
+- Creating and configuring Microsoft 365 groups
 - Managing group membership
-- Resetting user passwords
-- Blocking user sign-in
-- User offboarding and deletion
-- Managing OneDrive folder permissions
-- Understanding Exchange Online administration
-- Exploring Microsoft Teams administrative settings
-- Reviewing Microsoft 365 organisational policies
-
-## Future Improvements
-
-- [ ] Add screenshots for all six exercises
-- [ ] Complete user creation and licence assignment
-- [ ] Create a group and verify membership
-- [ ] Practise a password reset
-- [ ] Simulate user offboarding
-- [ ] Test OneDrive folder permissions
-- [ ] Explore Exchange Online mailbox management
-- [ ] Explore Microsoft Teams administration
-- [ ] Add Microsoft Entra ID user and MFA administration labs
-- [ ] Add support tickets demonstrating Microsoft 365 issues
-- [ ] Document verification results and lessons learned
+- Creating Microsoft 365 user accounts
+- Configuring user password options
+- Reviewing Microsoft 365 Business Standard licensing
+- Managing user permissions and access
+- Blocking Microsoft 365 user sign-in
+- Deleting user accounts
+- Verifying completed administrative actions
+- Documenting IT support tasks using screenshots
 
 ---
 
-**Project Status:** Initial documentation / Lab foundation
+## Relevance to IT Support
 
-*This project forms part of my IT Support & Helpdesk Lab GitHub portfolio.*
+These exercises relate directly to common service desk responsibilities.
+
+**New employee onboarding:** Creating accounts, reviewing licences and adding users to the required groups.
+
+**User access management:** Managing group membership and reviewing account permissions.
+
+**Employee offboarding:** Blocking sign-in, removing accounts and verifying administrative changes.
+
+**Technical documentation:** Recording the steps taken and providing evidence of completed tasks.
+
+---
+
+## Conclusion
+
+This Microsoft 365 Admin Lab demonstrates my practical learning in user account management, Microsoft 365 group administration and user offboarding.
+
+By completing these exercises, I have developed my understanding of the Microsoft 365 Admin Centre and the administrative tasks commonly performed in a 1st Line IT Support or Service Desk role.
+
+The 10 screenshots provide supporting evidence of the three lab exercises and their results.
