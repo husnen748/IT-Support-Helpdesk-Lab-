@@ -1,554 +1,375 @@
-# IT Troubleshooting Lab – Windows 11 & IT Support
 
-## Project Overview
+# IT Troubleshooting Lab
 
-This project documents common IT troubleshooting scenarios encountered by Level 1 IT Support Technicians and Service Desk Analysts.
+## Overview
 
-The purpose of this lab is to develop practical troubleshooting skills, understand common technical problems and practise resolving IT support incidents using a structured approach.
+This project documents 10 common IT support troubleshooting scenarios that a 1st Line IT Support Technician or Service Desk Analyst may encounter.
 
-Each scenario includes the reported problem, troubleshooting steps and a section for documenting results and screenshots.
+Each scenario explains the problem, the steps to investigate and resolve it, and how to confirm the issue has been fixed.
 
-## Technologies and Tools
+The purpose of this project is to develop my understanding of IT troubleshooting, Windows support, Active Directory, networking, Microsoft Outlook and general helpdesk responsibilities.
 
-- Windows 11
-- Windows Server 2022
-- Active Directory Users and Computers (ADUC)
-- Command Prompt and PowerShell
-- Windows Event Viewer
-- Windows Task Manager
-- Windows Defender
-- Microsoft Outlook
-- Windows Print Management
-- Device Manager
-- Windows Services
-- Network troubleshooting utilities
+These are documented troubleshooting procedures for learning and reference, rather than records of completed practical tests.
 
 ---
 
-# IT Troubleshooting Scenarios
+## Table of Contents
 
-## Scenario 1: User Account Locked Out
+1. [User Account Locked Out](#1-user-account-locked-out)
+2. [Password Reset Request](#2-password-reset-request)
+3. [No Internet Connection](#3-no-internet-connection)
+4. [Printer Not Working](#4-printer-not-working)
+5. [Computer Running Slow](#5-computer-running-slow)
+6. [Unable to Connect to Wi-Fi](#6-unable-to-connect-to-wi-fi)
+7. [Outlook Not Receiving Emails](#7-outlook-not-receiving-emails)
+8. [Blue Screen of Death](#8-blue-screen-of-death-bsod)
+9. [Computer Won't Turn On](#9-computer-wont-turn-on)
+10. [User Cannot Access a Shared Drive](#10-user-cannot-access-a-shared-drive)
 
-### Problem
+---
 
-A user contacts the IT Service Desk because they cannot log in to their Windows computer.
+## Troubleshooting Scenarios
 
-The following message appears:
+### 1. User Account Locked Out
 
-**"The referenced account is currently locked out and may not be logged on to."**
+**Problem:** A user cannot sign in to their Windows computer because their Active Directory account is locked.
 
-### Troubleshooting Steps
+**Troubleshooting Steps:**
 
-1. Verify the user's identity before modifying their account.
-2. Open **Active Directory Users and Computers (ADUC)** on Windows Server 2022.
-3. Locate the affected user account.
-4. Right-click the user and select **Properties**.
+1. Confirm the user's identity using the company's verification process.
+2. Open **Active Directory Users and Computers (ADUC)**.
+3. Search for the affected user account.
+4. Right-click the account and select **Properties**.
 5. Open the **Account** tab.
 6. If the account is locked, select **Unlock account**.
-7. Click **Apply**, followed by **OK**.
-8. Ask the user to attempt logging in again.
-9. Confirm that the account is accessible.
+7. Click **Apply** and **OK**.
+8. Ask the user to sign in again.
+9. If the account continues locking, investigate failed sign-in attempts using **Event Viewer**.
+10. Check for saved passwords on other devices, services or applications that may be causing repeated failed logins.
 
-### Further Troubleshooting
+**Expected Result:** The account is unlocked and the user can successfully sign in.
 
-If the account repeatedly becomes locked:
-
-1. Open **Event Viewer** on the relevant domain controller.
-2. Navigate to **Windows Logs > Security**.
-3. Look for account lockout events, particularly **Event ID 4740**.
-4. Identify whether saved credentials, scheduled tasks or other devices are causing repeated authentication failures.
-5. Resolve the underlying cause before closing the incident.
-
-### Screenshots
-
-*Add screenshots showing the locked account, ADUC account properties and successful resolution.*
+**Skills Covered:** Active Directory, account management, user authentication, Event Viewer.
 
 ---
 
-## Scenario 2: Password Reset Request
+### 2. Password Reset Request
 
-### Problem
+**Problem:** A user has forgotten their Windows domain password and cannot sign in.
 
-A user has forgotten their Windows domain password and is unable to log in.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
-
-1. Verify the user's identity according to company security procedures.
+1. Verify the user's identity before resetting their password.
 2. Open **Active Directory Users and Computers**.
-3. Search for the affected user.
-4. Right-click the account.
-5. Select **Reset Password**.
-6. Enter a temporary password that meets the organisation's password policy.
-7. Select **User must change password at next logon**.
-8. Click **OK**.
-9. Provide the temporary password using an approved secure method.
-10. Ask the user to log in and create a new password.
-11. Confirm successful access.
+3. Locate the user's account.
+4. Right-click the account and select **Reset Password**.
+5. Enter a temporary password that meets the organisation's password policy.
+6. Select **User must change password at next logon**.
+7. Click **OK**.
+8. Communicate the temporary password through an approved secure method.
+9. Ask the user to sign in and change their password.
+10. Confirm the user can access their account.
 
-### Verification
+**Expected Result:** The user successfully signs in using their new password.
 
-Check that the user can log in with the new password and access the necessary company resources.
-
-### Screenshots
-
-*Add screenshots showing the password reset process. Do not display actual passwords.*
+**Skills Covered:** Active Directory, password management, identity verification, customer support.
 
 ---
 
-## Scenario 3: No Internet Connection
+### 3. No Internet Connection
 
-### Problem
+**Problem:** A user reports that their computer is connected to the network but cannot access the internet.
 
-A user reports that their Windows 11 computer cannot access websites or other internet services.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
-
-1. Confirm whether the issue affects one computer or multiple users.
-2. Check whether the Ethernet cable or Wi-Fi connection is active.
+1. Check whether other devices on the same network can access the internet.
+2. Confirm the network cable or Wi-Fi connection is working.
 3. Open **Command Prompt**.
-4. Check the network configuration:
+4. Run the following commands:
 
-```cmd
-ipconfig /all
-```
+   ```cmd
+   ipconfig /all
+   ```
 
-5. Identify the IP address, subnet mask, default gateway and DNS servers.
-6. Test connectivity to the default gateway:
+   Check the IP address, default gateway and DNS server settings.
 
-```cmd
-ping 192.168.1.1
-```
+   ```cmd
+   ping 8.8.8.8
+   ```
 
-*Replace the example IP address with the actual gateway.*
+   Test external IP connectivity.
 
-7. Test connectivity to an external IP address:
+   ```cmd
+   ping google.com
+   ```
 
-```cmd
-ping 8.8.8.8
-```
+   Test connectivity using a domain name.
 
-8. Test DNS resolution:
+   ```cmd
+   nslookup google.com
+   ```
 
-```cmd
-nslookup google.com
-```
+   Check whether DNS resolution is working.
 
-9. If necessary, clear the DNS cache:
+5. If the computer uses DHCP and has an invalid IP address, try:
 
-```cmd
-ipconfig /flushdns
-```
+   ```cmd
+   ipconfig /release
+   ipconfig /renew
+   ```
 
-10. If the computer uses DHCP and has an invalid address, renew the network configuration:
+6. Restart the network adapter if required.
+7. Check whether the problem affects only one computer or multiple users.
+8. Escalate to the network team if the issue appears to involve shared network infrastructure.
 
-```cmd
-ipconfig /release
-ipconfig /renew
-```
+**Expected Result:** The computer receives valid network settings and can access the internet.
 
-11. Disable and re-enable the network adapter if required.
-12. Test internet connectivity again.
-
-### Further Troubleshooting
-
-If the problem continues:
-
-- Check whether the DHCP server is available.
-- Verify the configured DNS servers.
-- Check network adapter drivers.
-- Investigate firewall, VPN or proxy settings.
-- Escalate wider network problems to the network administrator.
-
-**Note:** Some networks block ICMP ping requests. A failed ping does not always mean that the destination is unreachable.
-
-### Screenshots
-
-*Add screenshots showing network configuration, diagnostic commands and successful connectivity.*
+**Skills Covered:** TCP/IP, DHCP, DNS, Windows networking, Command Prompt.
 
 ---
 
-## Scenario 4: Printer Not Working
+### 4. Printer Not Working
 
-### Problem
+**Problem:** A user cannot print because print jobs are stuck in the queue or the printer displays an error.
 
-A user cannot print documents, or their print jobs remain stuck in the queue.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
-
-1. Confirm that the printer is powered on.
-2. Check the printer's network or USB connection.
+1. Check that the printer is switched on.
+2. Confirm that the printer is connected to the network or computer.
 3. Check for paper jams, low toner or printer error messages.
-4. On Windows 11, open **Settings > Bluetooth & devices > Printers & scanners**.
-5. Select the affected printer.
-6. Open the print queue.
-7. Cancel any stuck print jobs where appropriate.
-8. Open **Run** using **Windows + R**.
-9. Enter:
+4. Open **Settings > Bluetooth & devices > Printers & scanners**.
+5. Select the affected printer and open its print queue.
+6. Cancel stuck print jobs where appropriate.
+7. Open **Services** by running:
 
-```cmd
-services.msc
-```
+   ```cmd
+   services.msc
+   ```
 
-10. Locate the **Print Spooler** service.
-11. Right-click and select **Restart**, if appropriate.
-12. Return to Printers & Scanners.
-13. Print a test page.
-14. Confirm whether printing works.
+8. Find **Print Spooler**.
+9. Right-click the service and select **Restart**.
+10. Try printing a test page.
+11. If the issue continues, check the printer driver.
+12. Remove and re-add the printer if necessary.
 
-### Further Troubleshooting
+**Expected Result:** Print jobs are processed successfully and the user can print again.
 
-If the printer is still not working:
-
-- Verify the correct printer is selected.
-- Check whether the printer is offline.
-- Check the printer IP address for network printers.
-- Update or reinstall the printer driver when necessary.
-- Remove and re-add the printer if appropriate.
-- Escalate print server or hardware faults.
-
-**Note:** Restarting the Print Spooler can affect other queued print jobs on the same system. Check the impact before doing so.
-
-### Screenshots
-
-*Add screenshots showing the print queue, Print Spooler service and successful test page.*
+**Skills Covered:** Windows printer support, Print Spooler, device drivers, hardware troubleshooting.
 
 ---
 
-## Scenario 5: Computer Running Slowly
+### 5. Computer Running Slow
 
-### Problem
+**Problem:** A user reports that their Windows computer is slow, freezing or taking too long to open applications.
 
-A user reports that their Windows 11 computer is slow, freezes frequently or takes too long to open applications.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
+1. Open **Task Manager** using **Ctrl + Shift + Esc**.
+2. Select the **Performance** tab.
+3. Check CPU, memory and disk usage.
+4. Open the **Processes** tab.
+5. Identify applications using excessive system resources.
+6. Close unnecessary applications after confirming they are safe to close.
+7. Check available disk storage.
+8. Run a malware scan using **Windows Security / Microsoft Defender**.
+9. Review unnecessary startup applications in Task Manager.
+10. Use Windows storage cleanup tools to remove unnecessary temporary files.
+11. Restart the computer.
+12. Check whether performance has improved.
+13. Escalate if hardware limitations or faults are suspected.
 
-1. Ask when the problem started.
-2. Determine whether the issue affects the entire computer or a particular application.
-3. Press **Ctrl + Shift + Esc** to open Task Manager.
-4. Open the **Performance** tab.
-5. Review CPU, memory, disk and network usage.
-6. Open the **Processes** tab.
-7. Identify applications consuming unusually high resources.
-8. Close unnecessary applications safely.
-9. Check the available storage space.
-10. Open **Settings > Apps > Startup**.
-11. Disable unnecessary startup applications where permitted.
-12. Run a malware scan using **Windows Security**.
-13. Use **Storage Sense** or Disk Cleanup to remove unnecessary files.
-14. Restart the computer when appropriate.
-15. Check whether performance has improved.
+**Expected Result:** The computer becomes more responsive and applications run normally.
 
-### Further Troubleshooting
-
-If the problem continues:
-
-- Check Windows Update status.
-- Investigate disk health.
-- Review Event Viewer for recurring errors.
-- Check whether a recent software update introduced the issue.
-- Consider whether additional RAM or storage is required.
-
-**Important:** Avoid ending unknown system processes or deleting user data without appropriate checks.
-
-### Screenshots
-
-*Add screenshots showing Task Manager performance information and troubleshooting results.*
+**Skills Covered:** Windows troubleshooting, Task Manager, performance monitoring, Microsoft Defender.
 
 ---
 
-## Scenario 6: Unable to Connect to Wi-Fi
+### 6. Unable to Connect to Wi-Fi
 
-### Problem
+**Problem:** A user's laptop cannot connect to the office Wi-Fi network.
 
-A user reports that their Windows 11 laptop cannot find or connect to the office Wi-Fi network.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
+1. Confirm that Wi-Fi is enabled on the laptop.
+2. Check that Airplane mode is disabled.
+3. Check whether the correct wireless network is available.
+4. Ask whether other users can connect to the same network.
+5. If appropriate, forget the saved Wi-Fi network and reconnect.
+6. Open **Command Prompt** and run:
 
-1. Confirm that Wi-Fi is enabled.
-2. Check that Airplane mode is turned off.
-3. Open the Wi-Fi settings and check whether the required network appears.
-4. Determine whether other devices can connect to the network.
-5. If the network is visible, attempt to reconnect.
-6. If appropriate, forget the saved Wi-Fi network and reconnect using authorised credentials.
-7. Open Command Prompt.
-8. Check wireless interface information:
+   ```cmd
+   netsh wlan show interfaces
+   ```
 
-```cmd
-netsh wlan show interfaces
-```
+   Check the wireless adapter connection status.
 
-9. Check the network configuration:
+7. Run:
 
-```cmd
-ipconfig /all
-```
+   ```cmd
+   ipconfig /all
+   ```
 
-10. Verify whether the laptop has received a valid IP address.
-11. Open **Device Manager**.
-12. Locate the Wi-Fi network adapter.
-13. Check whether the adapter is disabled or reporting errors.
-14. Restart the adapter if necessary.
-15. Test Wi-Fi connectivity again.
+   Check the IP address and network configuration.
 
-### Further Troubleshooting
+8. If a DNS issue is suspected, run:
 
-- Check whether the wireless network is available.
-- Investigate driver problems.
-- Check signal strength.
-- Verify the correct security settings.
-- Investigate authentication failures.
-- Escalate wireless access point or infrastructure problems.
+   ```cmd
+   ipconfig /flushdns
+   ```
 
-### Screenshots
+9. Check the wireless adapter in **Device Manager**.
+10. Restart the adapter if necessary.
+11. Check for driver problems.
+12. Escalate if the issue appears to involve the wireless access point or network authentication.
 
-*Add screenshots showing Wi-Fi settings, adapter information and successful connection.*
+**Expected Result:** The laptop connects to the correct Wi-Fi network and can access required services.
+
+**Skills Covered:** Wireless networking, TCP/IP, DNS, Device Manager, network troubleshooting.
 
 ---
 
-## Scenario 7: Outlook Not Receiving Emails
+### 7. Outlook Not Receiving Emails
 
-### Problem
+**Problem:** A user reports that Microsoft Outlook has stopped receiving new emails.
 
-A user reports that Microsoft Outlook is no longer receiving new emails.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
-
-1. Confirm that the computer has internet connectivity.
-2. Check whether the user can access their mailbox using Outlook on the web.
-3. Check the **Junk Email**, **Deleted Items** and **Other** folders.
-4. Confirm that messages are not being redirected by inbox rules.
-5. If using classic Outlook, check the **Send/Receive** tab and confirm **Work Offline** is disabled.
-6. Check whether the mailbox has reached its storage limit.
+1. Confirm the computer has an internet connection.
+2. Check whether the user can access their mailbox through Outlook on the web.
+3. Check the **Junk Email** and **Other** folders.
+4. Check whether Outlook is in **Work Offline** mode, where that option is available.
+5. Review the Outlook connection status.
+6. Check mailbox storage usage and quota.
 7. Restart Outlook.
-8. Check for any account sign-in or synchronisation errors.
-9. If using Microsoft 365, check **Service health** in the Microsoft 365 admin centre, where authorised.
-10. Test whether the user can receive a new email.
+8. Check for any Microsoft 365 service issues using the Microsoft 365 Admin Center, if authorised.
+9. If necessary, repair or recreate the Outlook profile after checking company procedures.
+10. Test whether new emails are being received.
+11. Escalate to the email administrator if the problem continues.
 
-### Further Troubleshooting
+**Expected Result:** Outlook reconnects and new emails appear in the user's mailbox.
 
-If the problem persists:
-
-- Check the Microsoft 365 service status.
-- Verify the account has an appropriate Exchange Online licence.
-- Review Outlook profile issues.
-- Check for mailbox rules or filtering.
-- Create a new Outlook profile if necessary and approved.
-- Escalate unresolved mailbox or mail-flow issues to the Microsoft 365 administrator.
-
-**Important:** Do not remove an Outlook account or profile without checking for locally stored data and the possible impact.
-
-### Screenshots
-
-*Add screenshots showing the Outlook connection status, mailbox settings and verification results.*
+**Skills Covered:** Microsoft Outlook, Microsoft 365, email troubleshooting, mailbox management.
 
 ---
 
-## Scenario 8: Blue Screen of Death (BSOD)
+### 8. Blue Screen of Death (BSOD)
 
-### Problem
+**Problem:** A Windows computer crashes and displays a blue screen error before restarting.
 
-A user's Windows 11 computer unexpectedly crashes and displays a blue-screen error.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
+1. Record the error message or stop code displayed.
+2. Ask the user when the crashes started.
+3. Check whether any software or drivers were recently installed.
+4. Open **Event Viewer**.
+5. Navigate to **Windows Logs > System**.
+6. Look for critical errors around the time of the crash.
+7. Open **Reliability Monitor** to review the crash history.
+8. Run the following command in an elevated Command Prompt:
 
-1. Ask the user when the crashes started.
-2. Record the displayed stop code, if available.
-3. Determine whether new software, hardware or drivers were recently installed.
-4. Restart Windows if it is safe to do so.
-5. Open **Event Viewer**.
-6. Navigate to **Windows Logs > System**.
-7. Look for relevant errors around the time of the crash.
-8. Open **Reliability Monitor** by running:
+   ```cmd
+   sfc /scannow
+   ```
 
-```cmd
-perfmon /rel
-```
+9. Check disk health and consider running a disk repair command if appropriate.
+10. Investigate recently updated drivers and roll back faulty drivers if required.
+11. Run **Windows Memory Diagnostic** if a memory fault is suspected.
+12. Escalate if hardware failure is suspected.
 
-9. Review the system's reliability history.
-10. Open Command Prompt as administrator.
-11. Run:
+**Expected Result:** The cause of the crashes is identified and the computer operates without further blue screen errors.
 
-```cmd
-sfc /scannow
-```
-
-12. Review the results.
-13. Check available disk space and Windows Update status.
-14. Investigate recently installed drivers.
-15. Restart and monitor the computer.
-
-### Further Troubleshooting
-
-If crashes continue:
-
-- Investigate the relevant stop code.
-- Check disk health.
-- Run Windows Memory Diagnostic if memory errors are suspected.
-- Investigate drivers and recently installed updates.
-- Use additional Windows repair tools when justified.
-- Escalate persistent crashes for further investigation.
-
-**Note:** Before performing repairs that could affect files or system availability, ensure important data is backed up.
-
-### Screenshots
-
-*Add screenshots showing Event Viewer, Reliability Monitor and diagnostic results.*
+**Skills Covered:** Windows diagnostics, Event Viewer, system repair, driver troubleshooting.
 
 ---
 
-## Scenario 9: Computer Will Not Turn On
+### 9. Computer Won't Turn On
 
-### Problem
+**Problem:** A user presses the power button, but the computer does not start.
 
-A user reports that their desktop computer or laptop does not respond when the power button is pressed.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
+1. Check that the power cable is connected correctly.
+2. Test a different power socket.
+3. Check the power adapter or charger.
+4. For a laptop, connect the charger and allow time for the battery to charge.
+5. Look for power indicator lights.
+6. Check whether the computer produces any fan noise or display output.
+7. Disconnect unnecessary external devices.
+8. Perform a manufacturer-approved power reset if appropriate.
+9. Check whether the issue is with the monitor rather than the computer.
+10. If the device still does not power on, escalate for hardware inspection.
 
-1. Ask the user what happens when they press the power button.
-2. Check whether any lights, fans or sounds are present.
-3. Verify that the power cable is securely connected.
-4. Test an approved alternative power outlet.
-5. For laptops, check the charger and charging indicator.
-6. Where possible, test with a known-working compatible charger.
-7. For desktop computers, verify that the external power supply switch is on.
-8. Disconnect unnecessary external devices.
-9. Follow the manufacturer's recommended power-reset procedure, if applicable.
-10. Attempt to power on the computer again.
+**Expected Result:** The computer powers on successfully, or the suspected hardware fault is identified for further investigation.
 
-### Further Troubleshooting
-
-If the computer still does not start:
-
-- Check for a faulty charger or power adapter.
-- Investigate possible power supply failure.
-- Check for hardware faults.
-- Escalate the issue for hardware inspection or replacement.
-
-**Important:** Never open a power supply unit. Internal electrical components can retain dangerous voltages even after the equipment has been disconnected.
-
-### Screenshots
-
-*Add photos or screenshots of the relevant diagnostics when available.*
+**Skills Covered:** Hardware troubleshooting, power supply checks, laptop and desktop support.
 
 ---
 
-## Scenario 10: User Cannot Access a Shared Drive
+### 10. User Cannot Access a Shared Drive
 
-### Problem
+**Problem:** A user receives an Access Denied error when attempting to open a shared network folder.
 
-A user receives an **Access Denied** error when attempting to open a shared network folder.
+**Troubleshooting Steps:**
 
-### Troubleshooting Steps
+1. Confirm the user is signed in with the correct domain account.
+2. Check whether the computer is connected to the company network.
+3. Open **File Explorer > This PC**.
+4. Check whether the shared drive is mapped.
+5. If the drive is missing, select **Map network drive**.
+6. Enter the correct shared folder path, for example:
 
-1. Confirm the user is logged in with the correct domain account.
-2. Ask which shared folder they are trying to access.
-3. Identify the exact error message.
-4. Open **File Explorer**.
-5. Select **This PC**.
-6. Check whether the shared drive is mapped.
-7. If necessary, attempt to access the shared folder using its network path.
+   ```text
+   \\server\SharedDrive
+   ```
 
-Example:
+7. Check whether the user can access the shared folder.
+8. Open **Active Directory Users and Computers**.
+9. Check the user's security group membership.
+10. If access is approved but the required group membership is missing, arrange for the correct group to be assigned.
+11. Ask the user to sign out and sign back in if required.
+12. Check share permissions and NTFS permissions if access is still denied.
+13. Escalate permission changes when necessary.
 
-```text
-\\FILESERVER\SharedDrive
-```
+**Expected Result:** The user can access the shared network folder with the correct permissions.
 
-8. Check whether the file server is reachable.
-9. Open Active Directory Users and Computers.
-10. Locate the affected user.
-11. Open **Properties > Member Of**.
-12. Check whether the user belongs to the appropriate security group.
-13. If access has been authorised, add the user to the required group.
-14. Ask the user to sign out and sign back in so that their group membership is refreshed.
-15. Test access to the shared folder again.
-
-### Further Troubleshooting
-
-If access is still denied:
-
-- Check share permissions.
-- Check NTFS permissions.
-- Verify the group has the required access.
-- Check for incorrect or outdated saved credentials.
-- Confirm the shared folder still exists.
-- Escalate permission or file server problems to the system administrator.
-
-**Note:** Users should only receive access to folders and files required for their job role.
-
-### Screenshots
-
-*Add screenshots showing the access error, AD group membership and successful resolution.*
+**Skills Covered:** Active Directory, security groups, shared folders, NTFS permissions, Windows networking.
 
 ---
 
-# Troubleshooting Commands Reference
+## Troubleshooting Skills Summary
 
-The following Windows commands are useful for common service desk investigations.
-
-| Command | Purpose |
+| Area | Skills Covered |
 |---|---|
-| `ipconfig /all` | Display network configuration |
-| `ping` | Test ICMP network connectivity |
-| `nslookup` | Test DNS name resolution |
-| `ipconfig /flushdns` | Clear the local DNS resolver cache |
-| `ipconfig /renew` | Request renewed DHCP configuration |
-| `netsh wlan show interfaces` | Display wireless adapter information |
-| `gpupdate /force` | Refresh Group Policy settings |
-| `gpresult /r` | Display applied Group Policy information |
-| `sfc /scannow` | Check and repair protected Windows system files |
-| `services.msc` | Open Windows Services |
-| `eventvwr.msc` | Open Event Viewer |
-| `perfmon /rel` | Open Reliability Monitor |
-| `sysdm.cpl` | Open System Properties |
+| Active Directory | Account unlocks, password resets, security groups |
+| Windows 11 | Performance issues, system errors, hardware support |
+| Networking | TCP/IP, DNS, DHCP, Wi-Fi troubleshooting |
+| Microsoft 365 | Outlook connectivity and mailbox troubleshooting |
+| Hardware | Printers, power issues, device drivers |
+| Command Line | ipconfig, ping, nslookup, netsh, sfc |
+| IT Support | Investigation, troubleshooting, documentation and escalation |
 
 ---
 
-# General IT Support Troubleshooting Process
+## Troubleshooting Approach
 
-A structured troubleshooting method can help resolve incidents efficiently and minimise disruption.
+When dealing with an IT support issue, I aim to follow a consistent process:
 
-1. **Identify the problem:** Ask the user about the issue and record the symptoms.
-2. **Gather information:** Collect error messages, device details and relevant diagnostic results.
-3. **Investigate the cause:** Check the most likely causes before making changes.
-4. **Apply a solution:** Perform appropriate troubleshooting or corrective actions.
-5. **Verify the result:** Confirm with the user that the original issue has been resolved.
-6. **Document the incident:** Record the cause, actions taken and final resolution.
-7. **Escalate if required:** Refer complex or unresolved issues to the appropriate support team.
-
----
-
-# Project Summary
-
-This troubleshooting lab provides a foundation for practising common IT support incidents involving Windows 11, Active Directory, networking, Microsoft Outlook, printers and basic hardware troubleshooting.
-
-## Skills Covered
-
-- Windows 11 technical troubleshooting
-- Active Directory account support
-- Password resets and account unlocking
-- Network connectivity diagnostics
-- DNS and DHCP troubleshooting
-- Printer support
-- Outlook troubleshooting
-- System performance investigation
-- Windows error investigation
-- Basic hardware diagnostics
-- Shared folder access troubleshooting
-- Incident documentation and escalation
-
-## Future Improvements
-
-- [ ] Add screenshots for each troubleshooting scenario
-- [ ] Perform and document the troubleshooting exercises
-- [ ] Add simulated IT service desk tickets
-- [ ] Document the cause and resolution of each incident
-- [ ] Add troubleshooting verification results
-- [ ] Link scenarios to the IT Ticketing System project
-- [ ] Add additional Windows 11 and Microsoft 365 troubleshooting exercises
+1. **Identify the problem** – Understand the user's issue and collect relevant information.
+2. **Investigate** – Check error messages, settings, logs and possible causes.
+3. **Troubleshoot** – Apply appropriate fixes, starting with the least disruptive.
+4. **Test** – Confirm whether the problem has been resolved.
+5. **Document** – Record the problem, actions taken and outcome.
+6. **Escalate** – Refer the issue to the appropriate support team when necessary.
 
 ---
 
-**Project Status:** Initial documentation / Lab foundation
+## Conclusion
 
-*This project forms part of my IT Support & Helpdesk Lab GitHub portfolio.*
+This troubleshooting guide covers 10 common issues encountered in 1st Line IT Support and Service Desk environments.
+
+It provides a reference for diagnosing problems involving Windows computers, Active Directory, networking, printers, Microsoft Outlook and user access.
+
+The guide supports my ongoing learning and preparation for an entry-level IT Support or Service Desk Analyst role.
+
+The procedures are intended as educational documentation. Practical troubleshooting exercises and verified results can be added as the lab develops.
+
