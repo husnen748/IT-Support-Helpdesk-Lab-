@@ -1,140 +1,317 @@
-# IT-Support-Helpdesk-Lab-
 
-## About This Project
+# IT Support & Helpdesk Lab Portfolio
 
-Welcome to my IT Support & Helpdesk Lab portfolio.
+## About This Portfolio
 
-This repository is dedicated to developing and demonstrating practical IT support skills through hands-on labs, technical troubleshooting and simulated service desk scenarios.
+Welcome to my IT Support and Helpdesk Lab portfolio.
 
-The aim is to gain experience with the tools and technologies commonly used by **1st Line IT Support Technicians, Service Desk Analysts and IT Support Engineers**.
+I created this repository to develop and demonstrate technical skills relevant to 1st Line IT Support Technician, Service Desk Analyst and IT Support Engineer roles.
 
-The project covers Active Directory, Windows administration, IT ticketing systems, Microsoft 365 and common IT troubleshooting scenarios.
+The portfolio includes practical administration exercises, Windows Server and Active Directory lab documentation, IT ticketing workflow examples and troubleshooting guides.
 
-As I progress through the labs, I will continue updating this repository with screenshots, documentation and practical examples.
+My focus is on developing hands-on experience, understanding common service desk responsibilities and improving my ability to investigate, document and resolve technical issues.
 
 ---
 
-## Lab Projects
+## Portfolio Projects
 
-### 1. Active Directory Lab
+| Project | Focus | Documentation |
+|---|---|---|
+| Active Directory Lab | Windows Server, domain administration, DNS and Group Policy | [View Lab](./Active-Directory-Lab/) |
+| IT Ticketing Systems Lab | ServiceNow, Freshservice, Jira and ITSM workflows | [View Lab](./IT-Ticketing-System-Lab/) |
+| Microsoft 365 Admin Lab | User provisioning, groups and user offboarding | [View Lab](./Microsoft365-Admin-Lab%20/) |
+| IT Troubleshooting Lab | 10 common IT support troubleshooting scenarios | [View Lab](./Troubleshooting-Lab/) |
 
-**Technologies:** Windows Server 2022, Windows 11, Active Directory, Group Policy, DNS
+---
 
-Topics covered:
+## 1. Active Directory Lab - Windows Server 2022
 
-- Installing and configuring Active Directory Domain Services
-- Setting up a domain controller
-- Creating and managing user accounts
-- Managing security groups and organisational units
-- Configuring Group Policy
-- Joining Windows 11 computers to a domain
-- User onboarding and offboarding
-- Password resets and account management
+**Technologies:** Windows Server 2022, Windows 11 Pro, Active Directory Domain Services, DNS, Group Policy and Oracle VirtualBox.
 
-### 2. IT Ticketing System Lab
+This project documents the installation, configuration and administration of an Active Directory environment using Windows Server 2022 and Windows 11.
 
-**Technologies:** ServiceNow, Jira Service Management, Freshservice
+### Lab Environment
 
-Topics covered:
+- Domain Controller: DC-LAB
+- Domain: jslab.local
+- Windows 11 Client: WIN11
+- Virtualisation: Oracle VirtualBox
 
-- Creating and managing support tickets
-- Categorising and prioritising incidents
-- Assigning tickets to support technicians
-- Recording troubleshooting steps
-- Managing ticket statuses
-- Understanding Service Level Agreements (SLAs)
-- Escalating unresolved incidents
-- Resolving and closing support tickets
+### Areas Covered
 
-### 3. IT Troubleshooting Lab
+- Windows Server network configuration
+- Active Directory Domain Services installation
+- Domain controller configuration
+- DNS server configuration and verification
+- Windows 11 domain joining
+- Domain user authentication
+- Active Directory Users and Computers
+- Group Policy Object creation and configuration
+- Organisational Units
+- User account administration
+- Security group creation and membership management
 
-**Technologies:** Windows 11, Command Prompt, PowerShell, Event Viewer, Device Manager
+### Evidence and Progress
 
-Topics covered:
+The project contains 20 screenshot references covering Active Directory setup, Windows 11 domain membership, Group Policy, organisational units and user management.
 
-- Windows login and password problems
-- Network connectivity troubleshooting
-- DNS and DHCP issues
-- Printer troubleshooting
-- Wi-Fi connectivity issues
-- Outlook email problems
-- Slow computer performance
-- Windows system crashes
-- Basic hardware troubleshooting
-- Shared network folder access
+Some screenshots are genuine lab captures, while others are clearly identified illustrative examples.
 
-### 4. Microsoft 365 Administration Lab
+Further hands-on verification is planned for Group Policy, organisational units and user administration.
 
-**Technologies:** Microsoft 365 Admin Centre, Entra ID, Exchange Online, Teams, OneDrive, SharePoint
+**[View Active Directory Lab](./Active-Directory-Lab/)**
 
-Topics covered:
+---
 
-- Creating and managing Microsoft 365 users
-- Assigning and removing licences
-- Resetting user passwords
-- Creating and managing groups
-- Managing user access and permissions
-- Employee onboarding and offboarding
-- Managing OneDrive sharing permissions
-- Exploring Exchange Online administration
-- Exploring Microsoft Teams administration
+## 2. IT Ticketing Systems Lab
+
+**Platforms:** ServiceNow, Freshservice and Jira Service Management.
+
+This project explores how IT support teams manage incidents and service requests through IT Service Management (ITSM) systems.
+
+It includes six example ticket scenarios across three platforms.
+
+### ServiceNow
+
+Three incident scenarios:
+
+- Active Directory account lockout
+- New employee onboarding
+- Microsoft Outlook not receiving emails
+
+The examples cover incident details, priority, investigation notes and resolution documentation.
+
+### Freshservice
+
+One password reset incident demonstrating the ticket lifecycle:
+
+New → In Progress → Resolved
+
+The example covers ticket categorisation, internal work notes, customer communication and resolution.
+
+### Jira Service Management
+
+Two service desk reference scenarios:
+
+- Shared printer not printing
+- New employee access request
+
+The examples cover customer portals, agent views, ticket priorities, request details and SLA tracking.
+
+### Knowledge Covered
+
+- Incident and service request management
+- Ticket categorisation and prioritisation
+- Ticket assignment
+- ITIL incident management concepts
+- Service Level Agreements (SLAs)
+- Internal work notes
+- Customer communication
+- Ticket escalation and resolution workflows
+
+### Evidence and Progress
+
+This project contains six ticket scenarios and 12 screenshots.
+
+The ServiceNow and Freshservice screenshots are AI-generated illustrations. The Jira screenshots are third-party reference material.
+
+They are used to study ticketing workflows and are not presented as evidence of independently completed hands-on ticketing tasks.
+
+Creating and resolving tickets in actual practice environments is planned for a future stage.
+
+**[View IT Ticketing Systems Lab](./IT-Ticketing-System-Lab/)**
+
+---
+
+## 3. Microsoft 365 Admin Lab
+
+**Platform:** Microsoft 365 Admin Centre.
+
+This project documents three practical Microsoft 365 administration exercises supported by 10 screenshots.
+
+The tasks focus on managing users, groups and account access.
+
+### Task 1 - Microsoft 365 Group Management
+
+- Created a Microsoft 365 group called IT Support Team
+- Reviewed the group configuration
+- Added Peter Long as a member
+- Verified the group membership
+
+### Task 2 - Microsoft 365 User Provisioning
+
+- Created a user account for Peter Long
+- Configured account and password options
+- Reviewed user permissions
+- Reviewed Microsoft 365 Business Standard licensing
+- Verified successful account creation
+
+### Task 3 - User Offboarding
+
+- Located Carl Handen's account
+- Blocked the user from signing in
+- Deleted the account
+- Verified the account appeared in Deleted Users
+
+### Skills Practised
+
+- Microsoft 365 Admin Centre navigation
+- User account creation
+- User provisioning
+- Microsoft 365 group management
+- Group membership administration
+- Password configuration
+- Licence configuration review
+- Blocking user sign-in
+- Account deletion and offboarding
+- Verification and screenshot documentation
+
+### Evidence
+
+Three practical exercises documented with 10 screenshots covering group management, user creation and account deletion.
+
+**[View Microsoft 365 Admin Lab](./Microsoft365-Admin-Lab%20/)**
+
+---
+
+## 4. IT Troubleshooting Lab
+
+**Technologies:** Windows 11, Active Directory, Command Prompt, Event Viewer, Device Manager and Microsoft Outlook.
+
+This project provides troubleshooting procedures for 10 common IT support scenarios.
+
+### Scenarios Covered
+
+1. User account locked out
+2. Password reset request
+3. No internet connection
+4. Printer not working
+5. Computer running slow
+6. Unable to connect to Wi-Fi
+7. Outlook not receiving emails
+8. Blue Screen of Death (BSOD)
+9. Computer will not turn on
+10. User cannot access a shared drive
+
+### Troubleshooting Approach
+
+The guide follows a consistent approach to IT support:
+
+1. Identify the problem
+2. Investigate possible causes
+3. Apply appropriate troubleshooting steps
+4. Test the outcome
+5. Document the results
+6. Escalate when necessary
+
+### Knowledge Covered
+
+- Windows troubleshooting
+- Active Directory account support
+- TCP/IP, DNS and DHCP diagnostics
+- Wi-Fi connectivity
+- Printer and hardware troubleshooting
+- Outlook and mailbox issues
+- Event Viewer and Windows diagnostics
+- Shared folder access and permissions
+
+### Project Status
+
+These are documented troubleshooting procedures intended for learning and reference.
+
+They are not presented as records of completed practical troubleshooting tests.
+
+**[View IT Troubleshooting Lab](./Troubleshooting-Lab/)**
 
 ---
 
 ## Technologies and Tools
 
-| Category | Technologies |
+| Category | Technologies and Tools |
 |---|---|
-| Operating Systems | Windows 11, Windows Server 2022 |
-| Identity Management | Active Directory, Microsoft Entra ID |
-| Cloud Administration | Microsoft 365, Exchange Online |
-| IT Service Management | ServiceNow, Jira Service Management, Freshservice |
-| Troubleshooting | Command Prompt, PowerShell, Event Viewer |
-| Networking | TCP/IP, DNS, DHCP, Wi-Fi |
+| Operating Systems | Windows Server 2022, Windows 11 Pro |
+| Identity and Access | Active Directory, Microsoft 365 user and group management |
+| Cloud Administration | Microsoft 365 Admin Centre |
+| IT Service Management | ServiceNow, Freshservice, Jira Service Management (workflow study) |
 | Virtualisation | Oracle VirtualBox |
-| Collaboration | Microsoft Teams, OneDrive, SharePoint |
+| Networking | TCP/IP, DNS, DHCP, Wi-Fi |
+| Windows Administration | Server Manager, ADUC, Group Policy Management, DNS Manager |
+| Troubleshooting | Command Prompt, Event Viewer, Device Manager, Task Manager |
+| Documentation | GitHub, Markdown, screenshot documentation |
 
 ---
 
-## Project Development
+## IT Support Skills Development
 
-This portfolio is being developed in stages.
+Through these projects, I am developing knowledge and practical skills in:
 
-**Stage 1 – Documentation**
+### User and Account Administration
 
-Create the initial project structure and document the setup instructions and planned lab exercises.
+- Creating and managing user accounts
+- Managing security groups and group membership
+- Understanding access permissions
+- User onboarding and offboarding
+- Account security and password management
 
-**Stage 2 – Practical Labs**
+### Windows and Network Support
 
-Complete the exercises using virtual machines, Microsoft 365 administration tools and IT ticketing platforms.
+- Windows Server administration
+- Windows 11 domain membership
+- DNS and network configuration
+- Common network connectivity troubleshooting
+- Group Policy configuration and verification
 
-**Stage 3 – Evidence and Troubleshooting**
+### Service Desk Operations
 
-Add screenshots, troubleshooting results and examples of completed helpdesk tickets.
+- Understanding incident and service request workflows
+- Ticket priorities and categorisation
+- SLA monitoring concepts
+- Troubleshooting documentation
+- Customer communication and escalation
 
-**Stage 4 – Portfolio Improvements**
+### Microsoft 365 Administration
 
-Expand the labs with more realistic scenarios, advanced troubleshooting and additional technical skills.
-
----
-
-## Project Objectives
-
-- Build practical IT support and administration skills.
-- Develop confidence troubleshooting common IT problems.
-- Gain familiarity with IT service management platforms.
-- Practise documenting technical problems and resolutions.
-- Understand common first-line IT support workflows.
-- Create a portfolio demonstrating technical knowledge and continued professional development.
-
----
-
-## Project Status
-
-**Current Stage:** Building the lab foundation and preparing practical exercises.
-
-This repository is an ongoing project. Documentation, screenshots and completed lab evidence will be added as the work progresses.
+- Microsoft 365 user provisioning
+- Group management
+- Licence configuration review
+- Blocking user sign-in
+- User account deletion
 
 ---
 
-*This portfolio is intended to demonstrate my development and practical learning in IT Support, Service Desk Operations and Microsoft 365 Administration.*
+## Project Progress
+
+| Project | Current Progress |
+|---|---|
+| Active Directory Lab | Lab foundation documented; further hands-on verification planned |
+| IT Ticketing Systems Lab | Six example scenarios documented; practical platform exercises planned |
+| Microsoft 365 Admin Lab | Three administration exercises documented with 10 screenshots |
+| IT Troubleshooting Lab | Ten troubleshooting procedures documented |
+
+---
+
+## Future Improvements
+
+I plan to continue expanding this portfolio with additional practical exercises.
+
+- Replace illustrative Active Directory screenshots with genuine lab captures
+- Configure a stable IP address for the domain controller
+- Test Group Policy application on Windows 11
+- Practise Active Directory password resets and account unlocks
+- Complete user onboarding and offboarding exercises
+- Create and resolve tickets in actual ITSM practice environments
+- Document real troubleshooting tests and outcomes
+- Expand Microsoft 365 administration exercises
+- Add further screenshots and verification results
+
+---
+
+## Portfolio Purpose
+
+This repository supports my continued development towards a career in IT Support.
+
+It brings together Windows Server administration, Active Directory, Microsoft 365, service desk workflow knowledge and troubleshooting documentation.
+
+My aim is to build a portfolio that demonstrates both technical understanding and practical experience relevant to entry-level IT Support and Service Desk positions.
+
+The repository will continue to be updated as I complete additional exercises and develop new skills.
