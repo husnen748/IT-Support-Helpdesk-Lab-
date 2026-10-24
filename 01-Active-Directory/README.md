@@ -33,7 +33,7 @@ The project focuses on Windows Server administration, Active Directory configura
 | Client Preferred DNS | 192.168.1.226 |
 | Windows 11 Computer Name | WIN11 |
 
-**Network Note:** The Windows Server was using DHCP when the network configuration was captured. For a production environment, a domain controller should use a stable IP address, normally through static configuration or a DHCP reservation.
+**Network Note:** The Windows Server was using DHCP when the network configuration was captured. A domain controller should have a stable IP address, normally through static configuration or a DHCP reservation.
 
 ---
 
@@ -62,7 +62,7 @@ The server IP address observed in this lab was `192.168.1.226`.
 
 ### Screenshot 01 — Windows Server Network Configuration
 
-![Windows Server Network Configuration](01-server-network-config.png.png)
+![Windows Server Network Configuration](screenshots/01-server-network-config.png)
 
 This screenshot shows the Windows Server network information using the `ipconfig /all` command.
 
@@ -81,7 +81,7 @@ Server Manager is used to configure and manage Windows Server roles and features
 
 ### Screenshot 02 — Windows Server Manager
 
-![Windows Server Manager](02-server-manager.png.png)
+![Windows Server Manager](screenshots/02-server-manager.png)
 
 This screenshot shows Windows Server 2022 running in Oracle VirtualBox, with the server details displayed in Server Manager.
 
@@ -107,7 +107,7 @@ The DNS Server role is also required for Active Directory domain name resolution
 
 ### Screenshot 03 — Installed Server Roles
 
-![Installed Server Roles](03-installed-server-roles.png.png)
+![Installed Server Roles](screenshots/03-installed-server-roles.png)
 
 This screenshot shows Active Directory Domain Services and DNS Server listed as installed server roles.
 
@@ -139,7 +139,7 @@ The server restarts after the domain controller promotion process.
 
 ### Screenshot 04 — Active Directory Server Configuration
 
-![Active Directory Server Configuration](04-active-directory-server.png.png)
+![Active Directory Server Configuration](screenshots/04-active-directory-server.png)
 
 This screenshot shows Active Directory Domain Services in Server Manager after installation and configuration.
 
@@ -170,7 +170,7 @@ This identifies the logon server used by the current Windows session.
 
 ### Screenshot 05 — Domain Controller Verification
 
-![Domain Controller Verification](05-domain-controller-verification.png.png)
+![Domain Controller Verification](screenshots/05-domain-controller-verification.png)
 
 This screenshot shows the Windows logon server verification command.
 
@@ -192,9 +192,9 @@ DNS is an important part of Active Directory because domain computers use it to 
 
 ### Screenshot 06 — DNS Server Configuration
 
-![DNS Server Configuration](06-dns-configuration.png.png)
+![DNS Server Configuration](screenshots/06-dns-configuration.png)
 
-This screenshot shows the DNS Manager with the `jslab.local` forward lookup zone and domain-related DNS records.
+This screenshot shows DNS Manager with the `jslab.local` forward lookup zone and domain-related DNS records.
 
 ---
 
@@ -212,7 +212,7 @@ Active Directory Users and Computers is used to manage users, computers, groups 
 
 ### Screenshot 08 — Active Directory Verification
 
-![Active Directory Verification](08-active-directory-verification.png.png)
+![Active Directory Verification](screenshots/08-active-directory-verification.png)
 
 This screenshot shows Active Directory Users and Computers with the `jslab.local` domain and its containers.
 
@@ -259,7 +259,7 @@ The Windows 11 client must use the domain controller's DNS server to locate Acti
 
 ### Screenshot 09 — Windows 11 DNS Configuration
 
-![Windows 11 DNS Configuration](09-client-dns.png.png)
+![Windows 11 DNS Configuration](screenshots/09-client-dns.png)
 
 This screenshot shows Windows 11 configured to use the domain controller as its preferred DNS server.
 
@@ -293,7 +293,7 @@ After joining the domain, Windows 11 becomes part of the Active Directory enviro
 
 ### Screenshot 10 — Windows 11 Domain Membership
 
-![Windows 11 Domain Membership](10-domain-membership.png.png)
+![Windows 11 Domain Membership](screenshots/10-domain-membership.png)
 
 This screenshot shows the Windows 11 computer with the full device name `win11.jslab.local`.
 
@@ -312,7 +312,7 @@ After joining Windows 11 to the domain, its computer account should appear in Ac
 
 ### Screenshot 11 — Active Directory Computer Verification
 
-![Active Directory Computer Verification](11-domain-verification.png.png)
+![Active Directory Computer Verification](screenshots/11-domain-verification.png)
 
 This screenshot shows the `WIN11` computer object registered in Active Directory.
 
@@ -349,7 +349,7 @@ jslab\helpdesk
 
 ### Screenshot 12 — Windows 11 Domain Login
 
-![Windows 11 Domain Login](12-domain-login.png.png)
+![Windows 11 Domain Login](screenshots/12-domain-login.png)
 
 This screenshot shows a successful Windows 11 domain user session verified using the `whoami` command.
 
@@ -391,7 +391,7 @@ Desktop Lockdown Policy
 
 ### Screenshot 13 — Group Policy Object Creation
 
-![Group Policy Object Creation](13-gpo-created.png.png)
+![Group Policy Object Creation](screenshots/13-gpo-created.png)
 
 This screenshot shows the Desktop Lockdown Policy listed in Group Policy Management.
 
@@ -421,7 +421,7 @@ User Configuration
 
 ### Screenshot 14 — Group Policy Settings
 
-![Group Policy Settings](14-gpo-settings.png.png)
+![Group Policy Settings](screenshots/14-gpo-settings.png)
 
 This screenshot shows the Control Panel restriction configured as Enabled.
 
@@ -446,7 +446,7 @@ The linked policy should appear under Linked Group Policy Objects.
 
 ### Screenshot 15 — GPO Linked to an OU
 
-![GPO Linked to OU](15-gpo-linked.png.png)
+![GPO Linked to OU](screenshots/15-gpo-linked.png)
 
 *Illustrative example showing Desktop Lockdown Policy linked to the GPO-Test organisational unit.*
 
@@ -480,7 +480,7 @@ If the restriction has been applied successfully, Windows should prevent the use
 
 ### Screenshot 16 — Group Policy Verification
 
-![Group Policy Verification Example](16-gpo-verification-example.png.png)
+![Group Policy Verification Example](screenshots/16-gpo-verification-example.png)
 
 *Illustrative example showing a Group Policy refresh and a Windows restriction message. This is not a verified test result from the actual lab.*
 
@@ -518,7 +518,7 @@ jslab.local
 
 ### Screenshot 17 — Active Directory OU Structure
 
-![Active Directory OU Structure](17-ou-structure.png.png)
+![Active Directory OU Structure](screenshots/17-ou-structure.png)
 
 *Illustrative example showing departmental OUs under Company.*
 
@@ -539,7 +539,7 @@ Users can be placed into departmental OUs to make account management easier.
 
 ### Screenshot 18 — Users Within an OU
 
-![Users Within an OU](18-ou-contents.png.png)
+![Users Within an OU](screenshots/18-ou-contents.png)
 
 *Illustrative example showing user accounts organised within the HR OU.*
 
@@ -578,7 +578,7 @@ This section covers common Active Directory administration tasks, including user
 
 ### Screenshot 19 — Active Directory User Account
 
-![Active Directory User Account Example](19-user-account-example.png.png)
+![Active Directory User Account Example](screenshots/19-user-account-example.png)
 
 *Illustrative example showing the properties of the jsmith user account within the HR OU.*
 
@@ -606,7 +606,7 @@ HR-Staff
 
 ### Screenshot 20 — Active Directory Security Group
 
-![Security Group Example](20-security-group-example.png.png)
+![Security Group Example](screenshots/20-security-group-example.png)
 
 *Illustrative example showing HR-Staff configured as a Global Security group.*
 
@@ -634,7 +634,7 @@ jsmith
 
 ### Screenshot 21 — Security Group Membership
 
-![Security Group Membership Example](21-group-membership-example.png.png)
+![Security Group Membership Example](screenshots/21-group-membership-example.png)
 
 *Illustrative example showing jsmith as a member of the HR-Staff security group.*
 
