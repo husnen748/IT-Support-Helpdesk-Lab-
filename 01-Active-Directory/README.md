@@ -2,11 +2,13 @@
 
 ## Project Overview
 
-This project demonstrates how to install, configure and manage Active Directory Domain Services (AD DS) using Windows Server 2022 and Windows 11.
+This project demonstrates the installation, configuration and management of Active Directory Domain Services (AD DS) using Windows Server 2022 and Windows 11 Pro in a virtual lab environment.
 
-The lab covers the basic administrative tasks commonly performed by IT Support Technicians and Service Desk Analysts.
+The purpose of this project is to develop and demonstrate practical IT Support and Service Desk skills, including Windows Server administration, domain management, user accounts, security groups and Group Policy.
 
-### Technologies Used
+The lab was built using Oracle VirtualBox and focuses on tasks commonly performed by 1st Line IT Support Technicians and Service Desk Analysts.
+
+## Technologies Used
 
 - Windows Server 2022
 - Windows 11 Pro
@@ -15,534 +17,640 @@ The lab covers the basic administrative tasks commonly performed by IT Support T
 - DNS Server
 - Group Policy Management
 - Active Directory Users and Computers (ADUC)
+- Windows Command Prompt
 
-### Lab Environment
+## Lab Environment
 
 | Component | Configuration |
 |---|---|
 | Domain Controller | Windows Server 2022 |
 | Client Computer | Windows 11 Pro |
 | Virtualisation | Oracle VirtualBox |
-| Server Hostname | DC01 |
-| Domain Name | corp.local (example lab domain) |
-| Server IP Address | 192.168.56.10 (example) |
+| Server Hostname | DC-LAB |
+| Domain Name | jslab.local |
+| Server IP Address | 192.168.1.226 (observed in lab screenshots) |
 | Subnet Mask | 255.255.255.0 |
-| Preferred DNS | 192.168.56.10 |
+| Client Preferred DNS | 192.168.1.226 |
+| Windows 11 Computer Name | WIN11 |
 
-**Note:** The example IP addresses assume an appropriately configured VirtualBox lab network. Adjust them to match your environment. The server and client must be able to communicate with one another.
+**Note:** The IP address above was observed in the lab screenshots. The server was using DHCP when the network configuration was captured. A static IP address or DHCP reservation is recommended for a domain controller.
 
 ---
 
-# Part 1: Set Up Active Directory
+# Part 1: Active Directory Setup
 
-## Step 1: Configure a Static IP Address
+## Step 1: Configure and Check Windows Server Networking
 
-Before installing Active Directory, configure a static IP address on the Windows Server 2022 virtual machine.
-
-A static IP address ensures that the domain controller keeps the same network address.
+Before installing Active Directory, the Windows Server must have a working network connection.
 
 ### Check the Network Configuration
 
-1. Open **Command Prompt**.
+1. Open Command Prompt on Windows Server 2022.
 2. Enter the following command:
 
-```cmd
-ipconfig /all
-```
+`ipconfig /all`
 
-3. Identify the current IP address, subnet mask, default gateway and DNS settings.
-4. Check the VirtualBox network configuration.
-5. Choose an unused static IP address that matches your lab network.
+3. Check the server's IP address, subnet mask, gateway and DNS settings.
+4. Confirm that the server is connected to the correct VirtualBox network.
 
-### Configure the Static IP
+### Recommended Static IP Configuration
 
-1. Open **Server Manager**.
-2. Click **Local Server** on the left.
-3. Next to **Ethernet**, click the network connection link.
-4. Right-click your network adapter.
-5. Select **Properties**.
-6. Select **Internet Protocol Version 4 (TCP/IPv4)**.
-7. Click **Properties**.
-8. Select **Use the following IP address**.
-9. Enter the static IP settings.
+For a stable domain controller, configure a fixed IP address:
 
-### Example IP Configuration
+1. Open Server Manager.
+2. Select Local Server.
+3. Click the Ethernet network connection.
+4. Open the network adapter properties.
+5. Select Internet Protocol Version 4 (TCP/IPv4).
+6. Select Use the following IP address.
+7. Enter an appropriate unused address for the lab network.
+8. Save the settings.
 
-| Field | Example Value |
-|---|---|
-| IP Address | 192.168.56.10 |
-| Subnet Mask | 255.255.255.0 |
-| Default Gateway | Leave blank if the lab has no router |
-| Preferred DNS | 192.168.56.10 |
-| Alternate DNS | Leave blank for this single-DC lab |
+Once the DNS Server role is configured, the domain controller should use its own DNS service.
 
-10. Click **OK** to save.
+### Screenshot 01 — Windows Server Network Configuration
 
-**Important:** Once the DNS Server role is installed, the domain controller should use its own DNS service. If external internet DNS resolution is required, configure DNS forwarders on the DNS server.
+![Windows Server Network Configuration](screenshots/01-server-network-config.png)
 
-### Screenshots
-
-*Add screenshots showing the Windows Server network adapter and static IP configuration.*
+This screenshot shows the Windows Server network information obtained using `ipconfig /all`.
 
 ---
 
-## Step 2: Add Roles and Features
+## Step 2: Open Server Manager
 
-1. Open **Server Manager**.
-2. Click **Manage** in the top-right corner.
-3. Select **Add Roles and Features**.
-4. Click **Next** on the Before You Begin page.
-5. Select **Role-based or feature-based installation**.
-6. Click **Next**.
-7. Select the local Windows Server 2022 server, such as **DC01**.
-8. Click **Next**.
+Server Manager is used to install and manage Windows Server roles and features.
 
-### Screenshots
+1. Open Server Manager.
+2. Select Local Server.
+3. Review the server name, operating system, network configuration and domain information.
 
-*Add screenshots showing Server Manager and the Add Roles and Features wizard.*
+### Screenshot 02 — Windows Server Manager Overview
+
+![Windows Server Manager](screenshots/02-server-manager.png)
+
+This screenshot shows Windows Server 2022 running in Oracle VirtualBox.
 
 ---
 
 ## Step 3: Install Active Directory Domain Services
 
-1. On the **Server Roles** page, select **Active Directory Domain Services**.
-2. When prompted, click **Add Features**.
-3. Click **Next**.
-4. Leave the default selections on the Features page.
-5. Click **Next** through the AD DS information page.
-6. Click **Install**.
-7. Wait for the installation to complete.
+Active Directory Domain Services allows administrators to centrally manage domain users, computers and security settings.
 
-**Note:** Installing the AD DS role does not automatically make the server a domain controller. The server must be promoted.
+### Installation Steps
 
-### Screenshots
+1. Open Server Manager.
+2. Click Manage.
+3. Select Add Roles and Features.
+4. Select Role-based or feature-based installation.
+5. Select the Windows Server.
+6. On Server Roles, select Active Directory Domain Services.
+7. Click Add Features when prompted.
+8. Continue through the installation wizard.
+9. Click Install.
 
-*Add screenshots showing AD DS selected and the installation results.*
+The DNS Server role is also required for Active Directory domain name resolution.
+
+### Screenshot 03 — Installed Server Roles
+
+![Installed Server Roles](screenshots/03-installed-server-roles.png)
+
+This screenshot shows Active Directory Domain Services and DNS Server listed as installed server roles.
 
 ---
 
 ## Step 4: Promote the Server to a Domain Controller
 
-1. Open **Server Manager**.
-2. Click the notification flag in the top-right corner.
-3. Select **Promote this server to a domain controller**.
-4. Choose **Add a new forest**.
-5. Enter the root domain name:
+After installing AD DS, the server must be promoted to a domain controller.
 
-```text
-corp.local
-```
+### Configuration Steps
 
-6. Click **Next**.
+1. Open Server Manager.
+2. Click the notification flag.
+3. Select Promote this server to a domain controller.
+4. Select Add a new forest.
+5. Enter the domain name:
 
-**Note:** `corp.local` is used here as a lab example. For production environments, an organisation should generally use a DNS namespace it owns.
+`jslab.local`
 
-### Screenshots
+6. Leave DNS Server and Global Catalog selected.
+7. Create a Directory Services Restore Mode password.
+8. Review the configuration.
+9. Complete the prerequisite checks.
+10. Click Install.
 
-*Add screenshots showing the promotion wizard and forest configuration.*
+The server restarts after the domain controller promotion process.
 
----
+### Screenshot 04 — Active Directory Server Configuration
 
-## Step 5: Configure Domain Controller Options
+![Active Directory Server](screenshots/04-active-directory-server.png)
 
-1. Leave **DNS Server** selected.
-2. Leave **Global Catalog (GC)** selected.
-3. Keep the appropriate default forest and domain functional levels.
-4. Create a **Directory Services Restore Mode (DSRM)** password.
-5. Store the password securely.
-6. Click **Next**.
-
-**Important:** The DSRM password is used for Active Directory recovery and is separate from the normal domain administrator password.
-
-### Screenshots
-
-*Add screenshots showing the Domain Controller Options page. Do not expose passwords.*
+This screenshot shows the AD DS server in Server Manager after configuration.
 
 ---
 
-## Step 6: Complete the Domain Controller Configuration
+## Step 5: Verify the Domain Controller
 
-1. On **DNS Options**, review any warnings. A DNS delegation warning may be expected when creating a new lab forest.
-2. Click **Next**.
-3. Confirm the NetBIOS domain name is **CORP**.
-4. Click **Next**.
-5. Leave the default paths for the Active Directory database, log files and SYSVOL.
-6. Click **Next**.
-7. Review the configuration settings.
-8. Click **Next**.
-9. Wait for the prerequisite checks to finish.
-10. Resolve any blocking errors.
-11. Click **Install**.
+After installation, verify that the server is operating as a domain controller.
 
-The server will now configure Active Directory, install and configure the DNS Server role, create the new forest and become a domain controller.
+Open Command Prompt and enter:
 
-### Screenshots
+`echo %LOGONSERVER%`
 
-*Add screenshots showing the configuration review, prerequisite checks and completed installation.*
+The command displays the logon server associated with the current session.
 
----
+In this lab, the result was:
 
-## Step 7: Restart and Log In
+`\\DC-LAB`
 
-After the promotion process, the server should restart automatically.
+### Screenshot 05 — Domain Controller Verification
 
-At the Windows login screen, sign in using the domain administrator account.
+![Domain Controller Verification](screenshots/05-domain-controller-verification.png)
 
-Example:
-
-```text
-CORP\Administrator
-```
-
-Alternatively:
-
-```text
-Administrator@corp.local
-```
-
-Enter the domain administrator password configured for the account.
-
-### Screenshots
-
-*Add a screenshot showing successful domain administrator login. Do not include credentials.*
+This screenshot shows the logon server returned by Windows.
 
 ---
 
-# Part 2: Join Windows 11 to the Domain
+## Step 6: Verify DNS Configuration
 
-## Domain Join Experience
+DNS is an important part of Active Directory because domain computers use it to locate domain controllers and other domain services.
 
-This section demonstrates how to connect a Windows 11 client computer to the Active Directory domain.
+### Verification Steps
 
-### Step 1: Prepare the Windows 11 VM
+1. Open Server Manager.
+2. Select Tools.
+3. Open DNS.
+4. Expand the server.
+5. Expand Forward Lookup Zones.
+6. Select `jslab.local`.
+7. Review the DNS records.
 
-1. Create a second virtual machine using **Windows 11 Pro**.
-2. Connect it to the same accessible lab network as the domain controller.
+The DNS configuration should contain records associated with the domain controller.
+
+### Screenshot 06 — DNS Server Configuration
+
+![DNS Server Configuration](screenshots/06-dns-configuration.png)
+
+This screenshot shows the Active Directory DNS zone and associated records.
+
+---
+
+## Step 7: Verify Active Directory Users and Computers
+
+Active Directory Users and Computers is used to manage domain accounts, security groups, computers and organisational units.
+
+### Verification Steps
+
+1. Open Server Manager.
+2. Select Tools.
+3. Open Active Directory Users and Computers.
+4. Expand `jslab.local`.
+5. Confirm the Active Directory containers are available.
+
+### Screenshot 08 — Active Directory Verification
+
+![Active Directory Verification](screenshots/08-active-directory-verification.png)
+
+This screenshot shows Active Directory Users and Computers with the `jslab.local` domain.
+
+---
+
+# Part 2: Windows 11 Domain Join
+
+This section demonstrates how to connect a Windows 11 computer to the Active Directory domain.
+
+## Step 1: Prepare Windows 11
+
+1. Create a Windows 11 Pro virtual machine in Oracle VirtualBox.
+2. Connect the virtual machine to the same accessible network as the domain controller.
 3. Start Windows 11.
-4. Confirm the client can communicate with the domain controller.
+4. Confirm that the computer can communicate with the server.
 
-**Note:** Windows 11 Home does not support joining a traditional Active Directory domain.
+Windows 11 Pro supports joining an Active Directory domain.
 
-### Step 2: Configure Client DNS
+## Step 2: Configure Windows 11 DNS
 
-1. Open **Network Connections**.
-2. Right-click the network adapter.
-3. Select **Properties**.
-4. Open **Internet Protocol Version 4 (TCP/IPv4)**.
-5. Set the Preferred DNS server to the domain controller's IP address.
+The Windows 11 client must use the domain controller's DNS service to locate the Active Directory domain.
 
-Example:
+### Configuration Steps
 
-```text
-192.168.56.10
-```
+1. Open Windows 11 Settings.
+2. Navigate to Network & Internet.
+3. Open the network connection properties.
+4. Select DNS server assignment.
+5. Change the setting to Manual.
+6. Enable IPv4.
+7. Enter the domain controller IP address.
 
-6. Save the settings.
+**Preferred DNS:** `192.168.1.226`
 
-### Step 3: Join the Domain
+8. Save the settings.
 
-1. Press **Windows + R**.
-2. Enter:
+### Screenshot 09 — Windows 11 DNS Configuration
 
-```cmd
-sysdm.cpl
-```
+![Windows 11 DNS Configuration](screenshots/09-client-dns.png)
 
-3. Select the **Computer Name** tab.
-4. Click **Change**.
-5. Select **Domain**.
-6. Enter:
+This screenshot shows Windows 11 configured to use the domain controller as its preferred DNS server.
 
-```text
-corp.local
-```
+---
 
-7. Click **OK**.
-8. Enter authorised domain administrator credentials when prompted.
-9. Wait for the domain welcome message.
-10. Restart Windows 11.
+## Step 3: Join Windows 11 to Active Directory
 
-### Step 4: Log In With a Domain Account
+### Domain Join Steps
 
-After restarting, select **Other user** and sign in using an existing domain user account.
+1. Press Windows + R.
+2. Enter `sysdm.cpl`.
+3. Open the Computer Name tab.
+4. Click Change.
+5. Select Domain.
+6. Enter `jslab.local`.
+7. Enter authorised domain credentials when prompted.
+8. Complete the domain join process.
+9. Restart Windows 11.
 
-Example:
+After joining the domain, the computer becomes part of the Active Directory environment.
 
-```text
-CORP\jsmith
-```
+### Screenshot 10 — Windows 11 Domain Membership
 
-Alternatively:
+![Windows 11 Domain Membership](screenshots/10-domain-membership.png)
 
-```text
-jsmith@corp.local
-```
+This screenshot shows the Windows 11 computer with the full device name `win11.jslab.local`.
 
-### Screenshots
+---
 
-*Add screenshots showing the domain join process, successful join message and domain login.*
+## Step 4: Verify the Computer in Active Directory
+
+After joining Windows 11 to the domain, the computer account should appear in Active Directory.
+
+### Verification Steps
+
+1. Open Active Directory Users and Computers.
+2. Expand `jslab.local`.
+3. Select Computers.
+4. Locate the Windows 11 computer account.
+
+### Screenshot 11 — Active Directory Computer Verification
+
+![Active Directory Computer Verification](screenshots/11-domain-verification.png)
+
+This screenshot shows the `WIN11` computer object registered in Active Directory.
+
+---
+
+## Step 5: Log In Using a Domain Account
+
+After joining Windows 11 to the domain, users can sign in using Active Directory accounts.
+
+Example account:
+
+`JSLAB\helpdesk`
+
+### Verification Steps
+
+1. Start Windows 11.
+2. Sign in using the domain user account.
+3. Open Command Prompt.
+4. Run:
+
+`whoami`
+
+The command should display the domain and username.
+
+Example result:
+
+`jslab\helpdesk`
+
+### Screenshot 12 — Windows 11 Domain Login
+
+![Windows 11 Domain Login](screenshots/12-domain-login.png)
+
+This screenshot shows a successful Windows 11 domain user session verified using `whoami`.
 
 ---
 
 # Part 3: Group Policy Management
 
-Group Policy allows administrators to apply and manage Windows settings across users and computers in an Active Directory domain.
+Group Policy allows administrators to manage Windows settings across domain users and computers.
+
+This section covers creating a Group Policy Object, configuring a restriction and linking the policy to an organisational unit.
 
 ## Step 1: Open Group Policy Management
 
-1. Log in to Windows Server 2022.
-2. Open **Server Manager**.
-3. Click **Tools**.
-4. Select **Group Policy Management**.
-5. Expand the Active Directory forest and domain.
+1. Open Server Manager.
+2. Click Tools.
+3. Select Group Policy Management.
+4. Expand Forest: jslab.local.
+5. Expand Domains.
+6. Select `jslab.local`.
+
+---
 
 ## Step 2: Create a Group Policy Object
 
-1. Expand **Group Policy Objects**.
-2. Right-click **Group Policy Objects**.
-3. Select **New**.
-4. Enter a name for the policy.
+### Configuration Steps
 
-Example:
+1. Expand Group Policy Objects.
+2. Right-click Group Policy Objects.
+3. Select New.
+4. Enter the policy name:
 
-```text
-Desktop Lockdown Policy
-```
+`Desktop Lockdown Policy`
 
-5. Click **OK**.
+5. Click OK.
 
-## Step 3: Configure the Policy
+### Screenshot 13 — Group Policy Object Creation
 
-1. Right-click the newly created Group Policy Object.
-2. Select **Edit**.
-3. Navigate to the relevant settings.
+![Group Policy Object Creation](screenshots/13-gpo-created.png)
 
-Example:
+This screenshot shows the Desktop Lockdown Policy listed in Group Policy Management.
 
-```text
-User Configuration
-   > Policies
-   > Administrative Templates
-   > Control Panel
-```
+---
 
-4. Select the setting you want to configure.
-5. Enable or disable the policy as required.
-6. Save the configuration.
+## Step 3: Configure Group Policy Settings
 
-## Step 4: Link the GPO to an OU
+The Desktop Lockdown Policy is designed to restrict access to Control Panel and Windows Settings for selected test users.
 
-1. Return to Group Policy Management.
-2. Find the relevant Organisational Unit.
-3. Right-click the OU.
-4. Select **Link an Existing GPO**.
-5. Choose the Group Policy Object.
-6. Click **OK**.
+### Configuration Steps
 
-## Step 5: Apply and Verify the Policy
+1. Right-click Desktop Lockdown Policy.
+2. Select Edit.
+3. Navigate to:
 
-On the Windows 11 client, open Command Prompt with appropriate permissions and run:
+User Configuration → Policies → Administrative Templates → Control Panel
 
-```cmd
-gpupdate /force
-```
+4. Open Prohibit access to Control Panel and PC settings.
+5. Select Enabled.
+6. Click Apply.
+7. Click OK.
 
-To view the applied policies, run:
+### Screenshot 14 — Group Policy Settings
 
-```cmd
-gpresult /r
-```
+![Group Policy Settings](screenshots/14-gpo-settings.png)
 
-**Note:** Standard domain-account password policies are normally configured at the domain level, rather than through a GPO linked only to a departmental OU.
+This screenshot shows the Control Panel restriction configured as Enabled.
 
-### Screenshots
+---
 
-*Add screenshots showing the GPO, configured settings, OU link and policy verification.*
+## Step 4: Link the GPO to an Organisational Unit
+
+A Group Policy Object must be linked to an appropriate domain, site or OU for its settings to apply.
+
+### Configuration Steps
+
+1. Open Group Policy Management.
+2. Expand `jslab.local`.
+3. Expand Company.
+4. Select the GPO-Test OU.
+5. Right-click the OU.
+6. Select Link an Existing GPO.
+7. Select Desktop Lockdown Policy.
+8. Click OK.
+
+The linked policy should appear under Linked Group Policy Objects.
+
+### Screenshot 15 — GPO Linked to an OU
+
+![GPO Linked to OU](screenshots/15-gpo-linked.png)
+
+*Illustrative example showing Desktop Lockdown Policy linked to GPO-Test.*
+
+---
+
+## Step 5: Verify Group Policy on Windows 11
+
+After a user-targeted GPO is linked to an OU containing the intended test user, Windows can process the policy during Group Policy refresh and sign-in.
+
+### Verification Steps
+
+1. Sign in to Windows 11 using an appropriate domain test account.
+2. Open Command Prompt.
+3. Run:
+
+`gpupdate /force`
+
+4. Sign out and sign back in if required.
+5. Run:
+
+`gpresult /r`
+
+6. Check whether Desktop Lockdown Policy appears in the applied user policies.
+7. Attempt to open Control Panel.
+
+If the restriction is applied correctly, Windows should prevent the user from opening Control Panel.
+
+### Screenshot 16 — Group Policy Verification
+
+![Group Policy Verification Example](screenshots/16-gpo-verification-example.png)
+
+*Illustrative example showing a successful Group Policy refresh and a Windows restriction message. This is not a verified test result from the lab.*
 
 ---
 
 # Part 4: Organisational Units (OUs)
 
-Organisational Units are containers used to organise Active Directory objects such as users, groups and computers.
+Organisational Units help administrators organise Active Directory users, groups and computers.
 
-They also allow administrators to apply Group Policy settings and delegate administration.
+They can also be used to apply Group Policy settings to specific departments and delegate administrative responsibilities.
 
-## Step 1: Open Active Directory Users and Computers
+## Step 1: Create Organisational Units
 
-1. Open **Server Manager**.
-2. Click **Tools**.
-3. Select **Active Directory Users and Computers**.
-4. Expand the domain:
+### Configuration Steps
 
-```text
-corp.local
-```
+1. Open Active Directory Users and Computers.
+2. Expand `jslab.local`.
+3. Right-click the domain.
+4. Select New → Organizational Unit.
+5. Enter the OU name.
+6. Click OK.
+7. Repeat for additional departments.
 
-## Step 2: Create an Organisational Unit
-
-1. Right-click the domain.
-2. Select **New**.
-3. Click **Organizational Unit**.
-4. Enter the OU name.
-5. Click **OK**.
-
-Example organisational units:
+### Example OU Structure
 
 ```text
-corp.local
+jslab.local
 │
-├── IT
-│
-├── HR
-│
-├── Finance
-│
-├── Sales
-│
-└── Workstations
+└── Company
+    ├── Finance
+    ├── HR
+    ├── IT
+    └── GPO-Test
 ```
 
-## Step 3: Organise Active Directory Objects
+### Screenshot 17 — Active Directory OU Structure
 
-1. Select an existing user or computer object.
-2. Right-click the object.
-3. Select **Move**.
-4. Choose the appropriate Organisational Unit.
-5. Click **OK**.
+![Active Directory OU Structure](screenshots/17-ou-structure.png)
 
-OUs can also be used to apply specific Group Policy settings to different departments.
+*Illustrative example showing departmental OUs under Company.*
 
-### Screenshots
+---
 
-*Add screenshots showing the newly created OUs and their objects.*
+## Step 2: Organise Users Within an OU
+
+Users can be placed into departmental OUs to make account management easier.
+
+### Configuration Steps
+
+1. Open Active Directory Users and Computers.
+2. Expand `jslab.local`.
+3. Expand Company.
+4. Select the relevant department, such as HR.
+5. Create a user inside the OU or move an existing user into it.
+6. Verify that the user appears in the correct OU.
+
+### Screenshot 18 — Users Within an OU
+
+![Users Within an OU](screenshots/18-ou-contents.png)
+
+*Illustrative example showing user accounts organised within the HR OU.*
 
 ---
 
 # Part 5: User and Group Management
 
-Active Directory Users and Computers (ADUC) allows administrators to manage user accounts, security groups and computer objects.
+This section demonstrates common Active Directory administration tasks, including user account creation, security group configuration and group membership management.
 
-## Step 1: Create a User Account
+## Step 1: Create an Active Directory User Account
 
-1. Open **Active Directory Users and Computers**.
-2. Expand:
+### Configuration Steps
 
-```text
-corp.local
-```
+1. Open Active Directory Users and Computers.
+2. Expand `jslab.local`.
+3. Open Company → HR.
+4. Right-click the HR OU.
+5. Select New → User.
+6. Enter the account details.
 
-3. Open the relevant departmental OU, such as **HR**.
-4. Right-click the OU.
-5. Select **New > User**.
-6. Enter the user's first name and last name.
-7. Enter the username.
+### Example User Account
 
-Example:
-
-| Field | Example |
+| Field | Value |
 |---|---|
 | First Name | James |
 | Last Name | Smith |
 | Username | jsmith |
-| Domain | corp.local |
+| Domain | jslab.local |
 | Department | HR |
 
-8. Click **Next**.
-9. Create a temporary password.
-10. Select **User must change password at next logon**, if appropriate.
-11. Click **Next**.
-12. Click **Finish**.
+7. Click Next.
+8. Create a temporary password.
+9. Select User must change password at next logon, if appropriate.
+10. Complete the wizard.
+11. Open the user account properties to review the details.
 
-The new user should now appear inside the selected OU.
+### Screenshot 19 — Active Directory User Account
 
-### Screenshots
+![Active Directory User Account Example](screenshots/19-user-account-example.png)
 
-*Add screenshots showing user creation and the completed account.*
+*Illustrative example showing the properties of the jsmith user account within the HR OU.*
 
 ---
 
 ## Step 2: Create a Security Group
 
-1. Open **Active Directory Users and Computers**.
-2. Navigate to the appropriate OU.
-3. Right-click the OU.
-4. Select **New > Group**.
-5. Enter the group name.
+Security groups allow administrators to manage permissions and access for multiple users.
 
-Example:
+### Configuration Steps
 
-```text
-HR-Staff
-```
+1. Open Active Directory Users and Computers.
+2. Navigate to Company → HR.
+3. Right-click the HR OU.
+4. Select New → Group.
+5. Enter the group name:
 
-6. Select **Global** as the group scope.
-7. Select **Security** as the group type.
-8. Click **OK**.
+`HR-Staff`
 
-### Screenshots
+6. Select Global as the group scope.
+7. Select Security as the group type.
+8. Click OK.
 
-*Add screenshots showing the newly created security group.*
+### Screenshot 20 — Active Directory Security Group
+
+![Security Group Example](screenshots/20-security-group-example.png)
+
+*Illustrative example showing HR-Staff configured as a Global Security group.*
 
 ---
 
-## Step 3: Add Users to Security Groups
+## Step 3: Add a User to a Security Group
 
-1. Open **Active Directory Users and Computers**.
-2. Locate the security group.
-3. Double-click the group.
-4. Select the **Members** tab.
-5. Click **Add**.
-6. Enter the username.
+### Configuration Steps
 
-Example:
+1. Open Active Directory Users and Computers.
+2. Navigate to the HR OU.
+3. Double-click HR-Staff.
+4. Select the Members tab.
+5. Click Add.
+6. Enter the username:
 
-```text
-jsmith
-```
+`jsmith`
 
-7. Click **Check Names**.
-8. Click **OK**.
-9. Click **Apply** to save.
+7. Click Check Names.
+8. Click OK.
+9. Click Apply.
+10. Verify that the user appears in the Members list.
 
-The user should now appear in the group's membership list.
+### Screenshot 21 — Security Group Membership
 
-### Screenshots
+![Security Group Membership Example](screenshots/21-group-membership-example.png)
 
-*Add screenshots showing the user successfully added to the security group.*
+*Illustrative example showing jsmith as a member of the HR-Staff security group.*
 
 ---
 
 # Project Summary
 
-This Active Directory lab provides a foundation for understanding and practising common IT administration tasks in a Windows domain environment.
+This Active Directory lab provides a foundation for understanding Windows Server administration and Active Directory support tasks.
 
-### Skills Covered
+The project covers Windows Server setup, Active Directory installation, Windows 11 domain membership, Group Policy configuration, organisational units, user accounts and security groups.
 
-- Configuring a static IP address
-- Installing Active Directory Domain Services
-- Promoting Windows Server 2022 to a domain controller
-- Configuring domain DNS
-- Joining Windows 11 to a domain
-- Creating and managing Organisational Units
-- Creating and managing user accounts
-- Creating security groups and assigning users
-- Creating and applying Group Policy Objects
+## Skills Covered
+
+- Windows Server 2022 administration
+- Virtual machine setup using Oracle VirtualBox
+- Windows network configuration
+- Active Directory Domain Services installation
+- Domain controller configuration
+- DNS configuration and verification
+- Windows 11 domain joining
+- Domain user authentication
+- Active Directory Users and Computers
+- Organisational Unit management
+- Group Policy Object creation and configuration
+- Security group management
+- User account administration
+- Windows command-line verification
+
+## Screenshot Documentation
+
+The project has 20 planned screenshot references across five sections.
+
+| Section | Screenshots |
+|---|---|
+| Part 1 — Active Directory Setup | 01–06, 08 |
+| Part 2 — Windows 11 Domain Join | 09–12 |
+| Part 3 — Group Policy Management | 13–16 |
+| Part 4 — Organisational Units | 17–18 |
+| Part 5 — User and Group Management | 19–21 |
+
+**Evidence note:** Some screenshots are illustrative examples rather than captures from the live lab. These are identified in their captions. They demonstrate the intended configuration but should not be treated as proof that the corresponding actions were completed in the virtual machines.
 
 ## Future Improvements
 
-The following exercises will be added as the lab develops:
+The following practical exercises are planned to expand the project:
 
-- [ ] Add screenshots documenting each setup stage
-- [ ] Practise password resets and account unlocking
+- [ ] Replace illustrative screenshots with genuine lab captures
+- [ ] Configure a static IP address or DHCP reservation for the domain controller
+- [ ] Practise Active Directory password resets
+- [ ] Practise unlocking user accounts
 - [ ] Simulate new employee onboarding
 - [ ] Simulate employee offboarding
 - [ ] Troubleshoot domain login problems
-- [ ] Troubleshoot Group Policy issues
+- [ ] Troubleshoot DNS resolution problems
+- [ ] Troubleshoot Group Policy application issues
 - [ ] Document practical service desk support tickets
+- [ ] Practise user account disabling and re-enabling
 - [ ] Add verification commands and test results
 
 ---
 
-**Project Status:** Initial documentation / Lab foundation
+**Project Status:** Lab foundation documented; further hands-on verification and service desk exercises planned.
 
-*This project forms part of my wider IT Support & Helpdesk Lab portfolio.*
+*This project forms part of my wider IT Support and Helpdesk portfolio, focusing on practical skills relevant to 1st Line IT Support and Service Desk Analyst positions.*
